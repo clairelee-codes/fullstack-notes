@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html, body {
+        margin: 0;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            gap: 20px;
+        }
+        .button-container button {
+            border: solid 3px transparent;
+            border-radius: 20px;
+            cursor: pointer;
+            margin: 10px;
+            padding: 20px 30px;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .btn-ok {
+            background-color: #c0392b;
+        }
+        
+        
+        .btn-cancel {
+            background-color: #2b6ec0;
+        }
+        
+        .button-container button:hover{
+            border-color: black;
+            opacity: 0.8;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <button class="btn-ok">확인</button>
+        <button class="btn-cancel">취소</button>
+    </div>
+    
+</body>
+</html>
