@@ -1,16 +1,36 @@
-# Compiled class file
+# ===============================
+# macOS
+# ===============================
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ===============================
+# VSCode
+# ===============================
+.vscode/
+.history/
+*.code-workspace
+
+# ===============================
+# Node.js / JavaScript / React
+# ===============================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+dist/
+build/
+out/
+.env
+.env.local
+.env.*.local
+
+# ===============================
+# Java / Spring
+# ===============================
 *.class
-
-# Log file
-*.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
 *.jar
 *.war
 *.nar
@@ -18,9 +38,23 @@
 *.zip
 *.tar.gz
 *.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+.mtj.tmp/
 hs_err_pid*
 replay_pid*
 
-.DS_Store
+# Maven / Gradle
+target/
+build/
+.gradle/
+.idea/
+
+# ===============================
+# OS / Editor temporary files
+# ===============================
+*.swp
+*.swo
+*.tmp
+*.log
+*.bak
+*.orig
+*.old
