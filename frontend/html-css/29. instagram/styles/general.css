@@ -1,3 +1,10 @@
+*::after,
+*::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -13,7 +20,25 @@ body{
 img {
     max-width: 100%;
 }
-*::after,
-*::before {
-    box-sizing: ;
+
+:root {
+    --primary:#FFFFFF;
+    --secondary:#FAFAFA;
+    --border:#DBDBDB;
+
+    --stroy-border:#C7C7C7;
+
+    --text-dark:#262626;
+    --text-light:#999999
+}
+
+:root.darkTheme {
+    --primary:#000000;
+    --secondary:#050505;
+    --border:#262626;
+
+    --stroy-border:#707070;
+
+    --text-dark:#FAFAFA;
+    --text-light:#999999;
 }
