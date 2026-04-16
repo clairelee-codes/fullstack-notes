@@ -3,7 +3,7 @@ package sec03.chap06;
 public class Ex01 {
     static void main() {
 
-        // 문자열은 불련 immutable
+        // 문자열은 불변 immutable
 
         // 문자열 길이 반환
         int int1 = "".length();

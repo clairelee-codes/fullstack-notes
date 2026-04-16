@@ -1,5 +1,5 @@
 package sec03.chap07;
-// 문자열의 포캐팅과 null
+// 문자열의 포매팅과 null
 public class Ex01 {
     static void main() {
 

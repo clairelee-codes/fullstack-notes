@@ -35,9 +35,9 @@ public class Ex07 {
         String str_b4 = str_b1 + "";
         String str_b5 = str_b1.concat("");
 
-        int str_b1Hash = System.identityHashCode(str_b1);
-        int str_b4Hash = System.identityHashCode(str_b4);
-        int str_b5Hash = System.identityHashCode(str_b5);
+        int str_b1Hash = System.identityHashCode(str_b1);   // 1463801669
+        int str_b4Hash = System.identityHashCode(str_b4);   // 355629945
+        int str_b5Hash = System.identityHashCode(str_b5);   // 1463801669
 
         //  3. null이 포함될 경우
         String str_c1 = null;

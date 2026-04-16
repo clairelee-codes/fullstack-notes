@@ -23,7 +23,8 @@ public class Ex02 {
         boolean bool2 = Float.MIN_VALUE > Double.MIN_VALUE;
 
         // 최대 정밀도 테스트
-        double dblNum = 0.123456789123456789;
-        float fltNum = 0.123456789123456789f;   // float은 f붙여야함.
+        double dblNum = 0.123456789123456789;   // 0.12345678912345678
+        float fltNum = 0.123456789123456789f;   // 0.12345679
+        // float은 f붙여야함.
     }
 }
