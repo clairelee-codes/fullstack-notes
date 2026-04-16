@@ -5,7 +5,7 @@
 <details>
 <summary>주석, 자료형과 변수</summary>
 
-### 2. 주석
+### [2. 주석](backend/java-practice/src/sec02/chap02)
 
 ```java
 // 식별자 명명 관례
