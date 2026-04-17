@@ -31,7 +31,7 @@ final int INT_NUM = 1;
 <details>
 <summary>정수 자료형들과 관련 연산자</summary>
 
-### 1. 정수 자료형들과 관련 연산자
+### [1. 정수 자료형들과 관련 연산자](./src/sec03/chap01)
 
 - long
 ```java
@@ -93,7 +93,7 @@ y -= 1; // 127
 <details>
 <summary>실수 자료형들</summary>
 
-### 2. 실수 자료형들
+### [2. 실수 자료형들](./src/sec03/chap02)
 
 ```java
 // 부동소수점 개념 알기
@@ -151,7 +151,7 @@ int int3 = (int) dblNum;
 <details>
 <summary>문자 자료형, 불리언 자료형과 관련 연산자</summary>
 
-### 3. 문자 자료형
+### [3. 문자 자료형](./src/sec03/chap03)
 ```java
 // 💡 리터럴에 더할 때와 변수에 더할 때 반환 자료형이 다름
 char ch_a2 = 'A' + 1;
@@ -172,7 +172,7 @@ boolean bool6 = 'A' < 'B';
 boolean bool7 = '가' > '나';
 ```
 
-### 4. 불리언 자료형과 관련 연산자
+### [4. 불리언 자료형과 관련 연산자](./src/sec03/chap04)
 ```java
 //  💡 &&가 ||보다 우선순위 높음
 boolean boolA = (num % 3 == 0) && (num % 2 == 0) || (num > 0) && (num > 10);
@@ -197,7 +197,7 @@ int changed1 = x < y ? (x += 2) : (y += 2);
 <details>
 <summary>문자열 자료형과 기초 사용법, 문자열의 메소드들</summary>
 
-### 5. 문자열 자료형과 기초 사용법
+### [5. 문자열 자료형과 기초 사용법](./src/sec03/chap05)
 ```java
 // 리터럴로 생성
 String hl1 = "Hello";
@@ -233,7 +233,7 @@ int hl4hash = System.identityHashCode(hl4); // 1161082381
 int hl5hash = System.identityHashCode(hl5); // 1161082381
 ```
 
-### 6. 문자열의 메소드들
+### [6. 문자열의 메소드들](./src/sec03/chap06)
 
 - concat
 ```java
@@ -283,7 +283,7 @@ String str_d3 = "a"
 <details>
 <summary>문자열의 포매팅과  null</summary>
 
-### 7. 문자열의 포매팅과  null
+### [7. 문자열의 포매팅과  null](./src/sec03/chap07)
 
 ```java
 // 포매팅
@@ -332,7 +332,7 @@ String[] strFormats = {
 <details>
 <summary>배열</summary>
 
-### 8. 배열
+### [8. 배열](./src/sec03/chap08)
 
 ```java
 //  이중 배열
@@ -370,11 +370,11 @@ NUMBERS[0] = 11;
 <details>
 <summary>배열, 타입 추론, 비트 연산자</summary>
 
-### 9. 타입 추론
+### [9. 타입 추론](./src/sec03/chap09)
 
 - var
 
-### 10. 비트 연산자
+### [10. 비트 연산자](./src/sec03/chap10)
 
 ```java
 // & | ^  << ??
