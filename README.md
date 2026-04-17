@@ -1,4 +1,4 @@
-# fullstack-note
+# Fullstack Note
 Study notes for Fullstack Development 
 
 ## frondend
