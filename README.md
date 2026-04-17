@@ -3,4 +3,4 @@ Study notes for Fullstack Development
 
 ## frondend
 ## backend
-- [java](/backend/java-practice)
+- [Java Note](/backend/java-practice)
