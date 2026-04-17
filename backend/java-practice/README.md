@@ -1,4 +1,4 @@
-# Java Note
+# Java Notes
 
 ## 2. 시작하기 
 
