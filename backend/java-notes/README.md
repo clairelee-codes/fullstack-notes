@@ -400,3 +400,184 @@ int y_R_1 = 19 >> 1;    // 001001   // 19/2 몫
 
 ## 4. 제어문과 메소드
 
+<details>
+<summary>if/ese, switch, for & for-each, while & do while</summary>
+
+### [1. if/else](./src/sec04/chap01)
+
+### [2. switch](./src/sec04/chap02)
+
+```java
+//  💡 break 관련 동작방식을 이용
+char yutnori = '윷';
+
+switch (yutnori) {
+    case '모': System.out.println("앞으로");
+    case '윷': System.out.println("앞으로");
+    case '걸': System.out.println("앞으로");
+    case '개': System.out.println("앞으로");
+    case '도': System.out.println("앞으로"); break;
+    default:
+System.out.println("무효");
+}
+```
+
+### [3. for / for-each](./src/sec04/chap03)
+
+```java
+//  루프 블록 안에서 변수값을 바꾸는 것으로
+for (int i = 0; i < 10;) {
+    System.out.println(i);
+    i += 2;
+}
+```
+
+```java
+//  💡 쉼표로 구분하여 여럿 사용 가능
+//  ⚠️ 변수의 자료형은 한 종류만 가능 (혼용 안 됨)
+for (byte a = 0, b = 10; a <= b;) {
+    System.out.printf("a: %d, b: %d%n", a++, b--);
+}
+```
+
+```java
+ String yuts = "도개걸윷모";
+char yut = '윷';
+
+boolean isValid = false;
+for (int i = 0; i <= yuts.indexOf(yut); i++) {
+    isValid = true;
+    System.out.println("앞으로");
+}
+if (!isValid) System.out.println("무효");
+```
+
+- 무한루프
+```java
+//  종료조건이 없는 for 루프
+for (;;) {
+    System.out.println("영원히");
+}
+// System.out.println("닿지 않아"); // ⚠️ 실행되지 않음
+```
+
+- for - each
+```java
+//  💡 for each 문법 - 배열이나 이후 배울 콜랙션 등에 사용
+for (String s : "호롤롤로".split("")) {
+    System.out.println(s);
+}
+```
+- labe
+```java
+//  💡 label : 중첩 루프에서 어느쪽을 continue, break 할 지 구분
+outer:
+for (int i = 0; i < 10; i++) {
+
+    inner:
+    for (int j = 0; j < 10; j++) {
+        if (j % 2 == 0) continue inner;
+        if (i * j >= 30) continue outer;
+
+        if (j > 8) break inner;
+        if (i - j > 7) break outer;
+
+        System.out.printf("i: %d, j: %d%n", i, j);
+    }
+}
+```
+
+### [4. while & do while](./src/sec04/chap04)
+
+</details>
+
+<details>
+<summary>메서드, 키보드 입력받기</summary>
+
+### [5. 메서드](./src/sec04/chap05)
+
+```java
+//  자바의 메소드는 하나의 값만 반환 가능
+//  여러 값을 반환하려면 배열 또는 객체 활용
+static int[] getMaxAndMin (int[] nums) {
+
+    int max = nums[0];
+    int min = nums[0];
+    for (int num : nums) {
+        max = max > num ? max : num;
+        min = min < num ? min : num;
+    }
+
+    return new int[] {max, min};
+}
+```
+
+- ... 연산자
+```java
+//  💡 ... 연산자 : 해당 위치 뒤로 오는 연산자들을 배열로 묶음
+//  int[] (배열 자체를 받음)과는 다름!
+static double getAverage(int... nums) {
+    double result = 0.0;
+    for (int num : nums) {
+        result += num;
+    }
+    return result / nums.length;
+}
+```
+```java
+static void main() {
+
+        double avg = getAverage(3, 91, 14, 27, 4);
+
+        //  💡 배열을 넣으면 자동으로 펼쳐져 인식됨
+        int[] numbers = {3, 91, 14, 27, 4};
+        double avgOfArr = getAverage(numbers);
+
+        String class3Desc = descClass(3, "목아진", "짱구", "철수", "훈이");
+
+        String[] kids = {"짱구", "철수", "훈이"};
+        String class3DescByArr = descClass(3, "목아진", kids);
+    }
+```
+
+### [6. 메서드 더 알아보기](./src/sec04/chap06)
+
+- 오버로딩
+```java
+static int add(int a, int b) { return a + b; }
+
+//  매개변수의 개수가 다름
+static int add(int a, int b, int c) { return a + b + c; }
+
+//  매개변수의 자료형이 다름
+static double add(double a, double b) { return a + b; }
+
+//  ⚠️ 반환 자료형이 다른 것은 오버로딩 안 됨 - 다른 함수명 사용
+//  static double add(int a, int b) { return (double) (a + b); }
+```
+
+- 재귀 메소드
+
+```java
+static int factorial (int num) {
+    return num == 0 ? 1 : num * factorial(--num);
+}
+```
+
+꼬리 재귀 체적화
+- 재귀 코드를 내부적으로 루프 형태로 바꿔서 스택이 쌓이지 않도록 함
+- 자바에서는 현재 기본적으로 제공하지 않음.
+- 반복 횟수가 너무 많아지는 작업에는 사용하지 말것
+
+### [7. 키보드 입력받기](./src/sec04/chap07)
+
+</details>
+
+<details>
+<summary>키보드 입력받기</summary>
+
+
+
+</details>
+
+
