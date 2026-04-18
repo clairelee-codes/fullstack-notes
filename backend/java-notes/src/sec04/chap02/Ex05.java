@@ -39,5 +39,7 @@ public class Ex05 {
                 ? "(잘못된 월입니다)"
                 : "분기 내 휴일: " + holidays
                 .substring(0, holidays.lastIndexOf(", "));
+
+        System.out.println(result);
     }
 }

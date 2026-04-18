@@ -6,7 +6,7 @@ public class Ex01 {
         byte fingersOut = 2;
 
         //  💡 switch : 괄호 안에 기준이 될 변수를 받음
-        //  가능한 자료형: byte, short, int, char, String, enum(이후 배움)
+        //  가능한 자료형: byte, short, int, char, String, enum
 
         switch (fingersOut) {
 

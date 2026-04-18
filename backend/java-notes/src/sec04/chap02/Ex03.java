@@ -4,7 +4,7 @@ public class Ex03 {
     static void main() {
 
         //  💡 break 관련 동작방식을 이용
-        char yutnori = '도';
+        char yutnori = '윷';
 
         switch (yutnori) {
             case '모': System.out.println("앞으로");
