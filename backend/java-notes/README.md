@@ -1,5 +1,7 @@
 # Java Notes
 
+---
+
 ## 2. 시작하기 
 
 <details>
@@ -27,9 +29,9 @@ final int INT_NUM = 1;
 //INT_NUM = 2; // ⚠ 불가
 ```
 
----
-
 </details>
+
+---
 
 ## 3. 자료형과 연산자
 
@@ -426,9 +428,9 @@ int x_R_1 = 5 >> 1;     // 00010    // 5/2 몫
 int y_R_1 = 19 >> 1;    // 001001   // 19/2 몫
 ```
 
----
-
 </details>
+
+---
 
 ## 4. 제어문과 메소드
 
@@ -615,9 +617,9 @@ static int factorial (int num) {
 
 ### [7. 키보드 입력받기](./src/sec04/chap07)
 
----
-
 </details>
+
+---
 
 ## 5. 객체지향 프로그래밍
 
@@ -1324,9 +1326,9 @@ p.hello(); // Parent
 c.hello();  // Child
 ```
 
----
-
 </details>
+
+---
 
 ## 6. 클래스 더 알아보기
 
@@ -1751,7 +1753,684 @@ public class Button {
 
 ### [9. 날짜와 시간 관련 클래스들](./src/sec06/chap09)
 
+</details>
+
+---
+
+## 7.  클래스와 자료형
+
+<details>
+<summary>Object</summary>
+
+### [1. Object](./src/sec07/chap01)
+
+- 모든 클래스의 조상
+- 필드 없이 메소드들만 갖고 있음
+
+- `@IntrinsicCandidate`: HotSpot VM (현재 대다수 JVM)에 의한 최적화
+  - 작성된 코드를 보다 효율적인 내부적 동작으로 덮어씀.
+- `native`: C, C++등 다른 언어로 작성된 코드를 호출하여 성능 향상
+  - Java Natice Interface 사용
+
+#### `toString` 메소드
+
+- 기본적으로는 클래스명과 해시값을 반환
+- 오버라이드해서 유용한게 사용 
+
+#### `equals` 메소드
+
+- 기본적으로는 `==`과 같이 레퍼런스 비교
+- 인스턴스 내용을 비교하려면 클래스마다 오버라이드해야 함 
+
+#### `hashCode`메소드
+
+- 기본적으로는 각 인스턴스 고유의 메모리 위치값을 정수로 반환
+
+`Click.java`
+```java
+     @Override
+     public int hashCode() {
+         return x * 100000 + y;
+     }
+``` 
+
+`Main.java`
+```java
+Click click1 = new Click(123, 456, 5323487);
+Click click2 = new Click(123, 456, 5323487);
+Click click3 = new Click(123, 456, 2693702);
+Click click4 = new Click(234, 567, 93827345);
+
+int click1Hash = click1.hashCode();
+int click2Hash = click2.hashCode();
+int click3Hash = click3.hashCode();
+int click4Hash = click4.hashCode();
+
+
+//  💡 Object의 toString은 내부에 hashCode 메소드 사용
+//  hash코드를 오버라이드하면 기본 toString에도 영향
+String click1str = click1.toString();
+String click2str = click2.toString();
+String click3str = click3.toString();
+String click4str = click4.toString();
+
+
+tring str1 = new String("Hello");
+String str2 = new String("Hello");
+String str3 = new String("World");
+
+boolean bool = str1 == str2;
+
+//  ⭐️ String 클래스 : 문자열 값이 같으면 해시값도 같도록 오버라이드 되어 있음
+int str1Hash = str1.hashCode();
+int str2Hash = str2.hashCode();
+int str3Hash = str3.hashCode();
+
+//  toString, equals 등도 오버라이드 되어 있음
+String str1ToStr = str1.toString();
+boolean str1eq2 = str1.equals(str2);
+```
+
+#### `clone` 메소드
+
+- 인스턴스가 스스로를 복사하기 위해 사용
+- `Cloneable` 인터페이스 구현 권장
+- **깊은 복사**는 직접 오버라이드하여 구현해주어야 함.
+
+`NotCloneable.java`
+```java
+public class NotCloneable {
+    //  원시타입 필드들
+    String title;
+    int no;
+
+    //  참조타입 필드들
+    int[] numbers;
+    Click click;
+    Click[] clicks;
+
+public NotCloneable(String title, int no, int[] numbers, Click click, Click[] clicks) {
+    this.title = title;
+    this.no = no;
+    this.numbers = numbers;
+    this.click = click;
+    this.clicks = clicks;
+}
+
+@Override
+protected Object clone() throws CloneNotSupportedException {
+
+    //  💡 아래 super의 clone : 필드들을 얕은복사 해주는 Object 메소드
+    //  - 원시타입 필드는 확실히 복사해줌. 참조타입은 참조복사만
+
+    //  ⭐️ Cloneable을 구현하지 않은 클래스에서 호출하면 오류 발생!
+    //  - 아래의 코드를 호출 안 하면 오류가 나지 않지만
+    //  - 원시값 복사까지 일일이 구현해주어야 함
+    //    - 즉 clone을 오버라이드해서 쓰는 의미 없음
+    return super.clone();
+    }
+}
+```
+  
+`Main.java`
+```java
+NotCloneable notCloneable = new NotCloneable(
+            "클릭들 1", 1, new int[] {1, 2, 3},
+            new Click(12, 34),
+            new Click[] { new Click(12, 34), new Click(56, 78) }
+    );
+
+NotCloneable clone1 = null;
+
+try {
+    clone1 = (NotCloneable) notCloneable.clone();
+} catch (CloneNotSupportedException e) {
+    System.out.printf("⚠️ 복제중 오류 발생 : %s%n", notCloneable);
+}
+//  ⚠️ 복사 실패 - CloneNotSupportedException 이라는 오류 발생
+```
+  
+`ShallowCopied.java`
+```java
+public class ShallowCopied implements Cloneable {
+String title;
+int no;
+
+    int[] numbers;
+    Click click;
+    Click[] clicks;
+
+    public ShallowCopied(String title, int no, int[] numbers, Click click, Click[] clicks) {
+        this.title = title;
+        this.no = no;
+        this.numbers = numbers;
+        this.click = click;
+        this.clicks = clicks;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+
+        //  Cloneable을 구현했으므로 정상 동작
+        //  - 원시값만 완전히 복사됨
+        return super.clone();
+    }
+}
+```
+  
+`Main.java`
+```java
+ShallowCopied shallowCopied = new ShallowCopied(
+"클릭들 1", 1, new int[] {1, 2, 3},
+new Click(12, 34),
+new Click[] { new Click(12, 34), new Click(56, 78) }
+);
+
+ShallowCopied clone2 = null;
+try {
+    clone2 = (ShallowCopied) shallowCopied.clone();
+} catch (CloneNotSupportedException e) {
+    //  오류가 나지 않으므로 실행되지 않음
+    System.out.printf("⚠️ 복제중 오류 발생 : %s%n", shallowCopied);
+}
+
+shallowCopied.title = "제목 바뀜";
+shallowCopied.no = 2;
+//  ⚠️ 참조 타입들은 완전히 복사되지 않음 (주소만 복사)
+shallowCopied.numbers[0] = 0;
+shallowCopied.click.x = 99;
+shallowCopied.clicks[0].x = 99;
+```
+  
+`DeepCopied.java`  
+```java
+public class DeepCopied implements Cloneable {
+    String title;
+    int no;
+
+    int[] numbers;
+    Click click;
+    Click[] clicks;
+
+    public DeepCopied(String title, int no, int[] numbers, Click click, Click[] clicks) {
+        this.title = title;
+        this.no = no;
+        this.numbers = numbers;
+        this.click = click;
+        this.clicks = clicks;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+
+        //  원시값들 복사
+        DeepCopied clone = (DeepCopied) super.clone();
+
+        //  ⭐️ 참조타입의 복사
+        //  - 원시값 요소들을 하나하나 복사해 넣음
+
+        clone.numbers = new int[numbers.length];
+        for (int i = 0; i < numbers.length; i++) {
+            clone.numbers[i] = numbers[i];
+        }
+
+        clone.click = new Click(click.x, click.y);
+
+        //  이중 참조 (인스턴스의 배열)
+        //  - 이중으로 복사
+        clone.clicks = new Click[clicks.length];
+        for (int i = 0; i < clicks.length; i++) {
+            clone.clicks[i] = new Click(clicks[i].x, clicks[i].y);
+        }
+
+        return clone;
+    }
+}
+```
+
+`Main.java`
+```java
+DeepCopied deepCopied = new DeepCopied(
+                "클릭들 1", 1, new int[] {1, 2, 3},
+                new Click(12, 34),
+                new Click[] { new Click(12, 34), new Click(56, 78) }
+        );
+
+DeepCopied clone3 = null;
+
+try {
+clone3 = (DeepCopied) deepCopied.clone();
+} catch (CloneNotSupportedException e) {
+        //  오류가 나지 않으므로 실행되지 않음
+        System.out.printf("⚠️ 복제중 오류 발생 : %s%n", deepCopied);
+}
+
+deepCopied.title = "제목 바뀜";
+deepCopied.no = 2;
+deepCopied.numbers[0] = 0;
+deepCopied.click.x = 99;
+deepCopied.clicks[0].x = 99;
+
+```
+
+---
+
+</details>
+
+<details>
+<summary>Wrapper 클래스들, 제네릭, 게임 예제</summary>
+
+### [2. Wrapper 클래스들](./src/sec07/chap02)
+
+#### 박싱과 언박싱
+
+- 원시값을 래퍼 클래스의 인스턴스로 **boxing**
+- 래퍼 클래스의 인스턴스를 원시값으로 **unboxing**
+
+#### 오토박싱과 언박싱
+
+- 명시적으로 박싱/언박싱하지 않아도 컴파일러가 자동으로 처리
+- 성능상으로는 떨어지므로 자주 자주 사용하지는 말것(반복문 안에서 등)
+
+---
+
+### [3. 제네릭](./src/sec07/chap03)
+
+- 자료형을 필요에 따라 동적으로 정할 수 있도록 해줌.
+
+#### 제네릭 메소드
+
+```java
+public class Main {
+    static void main(String[] args) {
+
+        int randNum = pickRandom(123, 456);
+        boolean randBool = pickRandom(true, false);
+        String randStr = pickRandom("마루치", "아라치");
+
+
+        YalcoChicken store1 = new YalcoChicken("판교");
+        YalcoChicken store2 = new YalcoChicken("역삼");
+        YalcoChicken randStore = pickRandom(store1, store2);
+
+        //  ⚠️ 타입이 일관되지 않고 묵시적 변환 불가하면 오류
+        //  double randFlt = pickRandom("hello", "world");
+        double randDbl = pickRandom(12, 34);
+    }
+
+
+    //  제네릭 메소드
+    //  T : 타입변수. 원하는 어떤 이름으로든 명명 가능
+    public static <T> T pickRandom(T a, T b) {
+        return Math.random() > 0.5 ? a : b;
+    }
+}
+```
+
+#### 제네릭 클래스
+
+`Pocket.java`
+```java
+//  원하는 자료형들로 세 개의 필드를 갖는 클래스
+public class Pocket<T1, T2, T3> {
+    private T1 fieldA;
+    private T2 fieldB;
+    private T3 fieldC;
+
+    public Pocket(T1 fieldA, T2 fieldB, T3 fieldC) {
+        this.fieldA = fieldA;
+        this.fieldB = fieldB;
+        this.fieldC = fieldC;
+    }
+
+    public T1 getFieldA() {
+        return fieldA;
+    }
+
+    public T2 getFieldB() {
+        return fieldB;
+    }
+
+    public T3 getFieldC() {
+        return fieldC;
+    }
+}
+```
+
+`Main.java`
+```java
+public class Main {
+    static void main(String[] args) {
+
+        //  선언시 아래와 같이 자료형에 각 타입변수의 자료형을 명시
+        //  - 제내릭에는 원시값이 아닌 참조타입(클래스)만 사용 가능 (double X / Double O)
+        //  - 내부적으로 Object기반으로 동작하기 때문
+        //  - (래퍼 클래스의 또 다른 존재 이유 -> 제네릭에 쓸려고)
+        Pocket<Double, Double, Double> size3d1 =
+                new Pocket<>(123.45, 234.56, 345.67);
+        
+        // <>를 사용 이유
+        // > 를 붙이면 타입추론을 통해 자료형에 맞는 제네릭을 채워 넣게 되고, 
+        // 그렇게 함으로써 의도한 바에 맞지 않은 자료형을 사용했을 때 
+        // 컴파일 오류를 발생시켜 예상치 못한 문제를 차단.
+
+        //  타입추론도 가능은 함
+        var size3d2 =
+                new Pocket<>(123.45, 234.56, 345.67);
+
+        double width = size3d1.getFieldA();
+        double height = size3d1.getFieldB();
+        double depth = size3d1.getFieldC();
+
+        Pocket<String, Integer, Boolean> person =
+                new Pocket<>("홍길동", 20, false);
+
+        //  제네릭 클래스는 배열 생성시 new로 초기화 필수
+        Pocket<String, Integer, Boolean>[] people = new Pocket[] {
+                new Pocket<>("홍길동", 20, false),
+                new Pocket<>("전우치", 30, true),
+                new Pocket<>("임꺽정", 27, true),
+        };
+    }
+}
+```
+
+#### 제한된 제네릭
+
+`Main.java`
+```java
+public class Main {
+    static void main(String[] args) {
+
+        double sum1 = add2Num(12, 34.56);
+        // double sum2 = add2Num("1" + true); // ⚠️ 불가
+        
+        descHuntingMamal(new PolarBear());
+        // descHuntingMamal(new GlidingLizard()); // ⚠️ 불가
+
+        descFlyingHunter(new Eagle());
+        descFlyingHunter(new GlidingLizard());
+        // descFlyingHunter(new PolarBear()); // ⚠️ 불가
+
+
+    }
+
+    //  💡 T는 Number를 상속한 클래스이어야 한다는 조건
+    public static <T extends Number> double add2Num(T a, T b) {
+        return a.doubleValue() + b.doubleValue();
+    }
+    //  ❓ 그냥 Number를 인자 자료형으로 하면 되지 않을까?
+
+    //  ⭐ 상속받는 클래스와 구현하는 인터페이스(들)을 함께 조건으로
+    //  여기서는 클래스와 인터페이스 모두 extends 뒤에 &로 나열
+    public static <T extends Mammal & Hunter & Swimmer>
+    void descHuntingMamal (T animal)  {
+        //  ⭐️ 조건에 해당하는 필드와 메소드 사용 가능
+        System.out.printf("겨울잠 %s%n", animal.hibernation ? "잠" : "자지 않음");
+        animal.hunt();
+    }
+
+    public static <T extends Flyer & Hunter>
+    void descFlyingHunter (T animal) {
+        animal.fly();
+        animal.hunt();
+    }
+}
+```
+
+`FormElement.java`
+```java
+public abstract class FormElement {
+    public enum MODE { LIGHT, DARK }
+
+    private static MODE mode = MODE.LIGHT;
+
+    public void printMode () {
+        System.out.println(mode);
+    }
+
+    abstract void func ();
+}
+```
+
+`Clickable.java`
+```java
+public interface Clickable {
+    void onClick();
+}
+
+```
+
+`FormClicker.java`
+```java
+public class FormClicker<T extends FormElement & Clickable> {
+    private T formElem;
+
+    public FormClicker(T formElem) {
+        this.formElem = formElem;
+    }
+
+    //  ⭐️ 조건의 클래스와 인터페이스의 기능 사용 가능
+    //  - 자료형의 범위를 특정해주므로
+    public void printElemMode () {
+        formElem.printMode();
+    }
+
+    public void clickElem () {
+        formElem.onClick(); // 이 부분이 Clickable의 메소드
+    }
+}
+```
+
+#### 와일드 카드
+
+`Horse.java`
+```java
+public class Horse<T extends Unit> {
+    private T rider;
+
+    public void setRider(T rider){
+        this.rider = rider;
+    }
+}
+```
+
+`HorseShop.java`
+```java
+public class HorseShop {
+    public static  void intoBestSellers (Horse<? extends Unit> horse){
+        System.out.println("베스트셀러 라인에 추가 - " + horse);
+    }
+
+    public static  void intoPreminums (Horse<? extends  Knight> horse){
+        System.out.println("프리미엄 라인에 추가 - " + horse);
+    }
+
+    public  static void intoEntryLevels (Horse<? super Knight> horse){
+        System.out.println("보급형 라인에 추가 - " + horse );
+    }
+}
+```
+
+`Main.java`
+```java
+public class Main {
+    static void main(String[] args) {
+
+        // 아무 유닛이나 태우는 말
+        Horse<Unit> avante = new Horse<>(); // ⭐️ Horse<Unit>에서 Unit 생략
+        avante.setRider(new Unit());
+        avante.setRider(new Knight());
+        avante.setRider(new MagicKnight());
+
+        // 기사 계급 이상을 태우는 말
+        Horse<Knight> sonata = new Horse<>();   // Knight 생략
+        // sonata.setRider(new Unit());    // ⚠️ 불가
+        sonata.setRider(new Knight());
+        sonata.setRider(new MagicKnight());
+
+        // 마법기사만 태우는 말
+        Horse<MagicKnight> grandeur = new Horse<>();
+        // grandeur.setRider(new Unit());   // ⚠️ 불가
+        // grandeur.setRider(new Knight());    // ⚠️ 불가
+        grandeur.setRider(new MagicKnight());
+
+        // ⚠️ 자료형과 제네릭 타입이 일치하지 않으면 대입 불가
+        // - 제네릭 타입이 상속관계에 있어도 마찬가지
+        // Horse<Unit> wrongHorse1 = new Horse<Knight>();
+        // Horse<Knight> wrongHorse2 = new Horse<Unit>();
+        // avante = sonata;
+        // sonata = grandeur;
+
+        // ⭐️ 와일드카드 - 제네릭 타입의 다형성을 위함
+        // 💡 Knight와 그 자식 클래스만 받을 수 있음
+        // 기사 계급 이상을 태우는 말만 대입 받을 수 있는 변수
+        Horse<? extends Knight> knightHorse;
+        // knightHorse = new Horse<Unit>();    // ⚠️ 불가
+        knightHorse = new Horse<Knight>();
+        knightHorse = new Horse<MagicKnight>();
+        // knightHorse = avante;   // ⚠️ 불가
+        knightHorse = sonata;
+        knightHorse = grandeur;
+
+        // 💡 Knight과 그 조상 클래스만 받을 수 있음
+        // 마법기사만 태우는 말은 받지 않는 변수
+        Horse<? super Knight> nonLuxuryHorse;
+        nonLuxuryHorse = avante;
+        nonLuxuryHorse = sonata;
+        // nonLuxuryHorse = grandeur;  ⚠️ 불가
+
+        // 💡 제한 없음 - <? extends Object> 와 동일
+        // 어떤 말이든 받는 변수
+        Horse<?> anyHorse;
+        anyHorse = avante;
+        anyHorse = sonata;
+        anyHorse = grandeur;
+
+
+        HorseShop.intoBestSellers(avante);
+        HorseShop.intoBestSellers(sonata);
+        HorseShop.intoBestSellers(grandeur);
+
+        // HorseShop.intoPreminums(avante);    ⚠️ 불가
+        HorseShop.intoPreminums(sonata);
+        HorseShop.intoPreminums(grandeur);
+
+        HorseShop.intoEntryLevels(avante);
+        HorseShop.intoEntryLevels(sonata);
+        // HorseShop.intoEntryLevels(grandeur);    ⚠️ 불가
+
+        // ⭐️ 제너릭은 변수에 들어올 값에 대한 제한
+        // - 데이터 그 자체에 대함이 아님
+        Horse[] horses = {avante, sonata, grandeur};
+        for (Horse horse : horses) {
+            horse.setRider(new Unit());
+        }   // ⁉️ 에러 발생하지 않음
+
+        // 에러 발생하지 않는 이유 GPT 설명
+        // ⭐️ raw type(로 타입) 사용
+        // raw type 사용 시 제네릭 타입 정보가 사라져 컴파일 타임 타입 체크가 불가능해짐 (타입 안전성 깨짐)
+        // - Horse[] 는 제네릭 타입 정보(<T>)가 제거된 상태
+        // - Horse<Unit>, Horse<Knight>, Horse<MagicKnight> 구분이 사라짐
+
+        // ⭐️ 컴파일 에러가 발생하지 않는 이유
+        // - raw type에서는 제네릭 타입이 Object로 처리됨
+        // - 즉, setRider(Object rider) 형태로 동작
+        // - 따라서 어떤 타입이든 전달 가능 (타입 체크 안 함)
+
+        // ⚠️ 문제점
+        // - 제네릭 타입 검사가 사라져 타입 안정성이 깨짐
+        // - 예: Horse<MagicKnight>에 Unit이 들어갈 수 있음
+
+        // ⚠️ 이후 값 꺼낼 때 문제 발생 가능
+        // - 내부적으로 MagicKnight로 캐스팅 시도
+        // - 실제로 Unit이 들어있으면 ClassCastException 발생 (런타임 에러)
+
+
+        // ✅ 안전한 방법 (와일드카드 사용)
+        Horse<?>[] safeHorses = {avante, sonata, grandeur};
+
+        for (Horse<?> horse : safeHorses) {
+            // ❌ 컴파일 에러 발생
+            // - ? 는 "정확한 타입을 모름" 의미
+            // - 따라서 setRider(...) 호출 불가 (타입 안전성 유지)
+            // horse.setRider(new Unit());
+        }
+
+    }
+}
+```
+---
+
+### [4. 게임 예제](./src/sec07/chap04)
+
+</details>
+
+---
+
+## 8. 컬렉션 프레임워크
+
+<details>
+<summary>컬렉션 프레임워크</summary>
+
+### 1. 컬렉션 프레임워크
+
+#### 널리 사용되는 컬렉션 클래스들
+
+🔴  :  추상 클래스  /  🔷  : 인터페이스  /  ⭐️  : 클래스
+
+`📁 java.util` 패키지
+
+- 🔴 AbstractCollection - 🔷 Collection
+    - 🔴 AbstractList - 🔷 List
+        - ⭐️  ArrayList
+        - 🔴 AbstractSequentialList
+            - ⭐️  LinkedList
+        - ⭐️  Vector
+            - ⭐️   Stack
+    - 🔴 AbstractSet - 🔷 Set
+        - ⭐️  HashSet
+            - ⭐️  LinkedHashSet
+        - ⭐️  TreeSet
+- 🔴 AbstractMap - 🔷 Map
+    - ⭐️  HashMap
+        - ⭐️  LinkedHashMap
+    - ⭐️  TreeMap
+
+
+####  컬랙션 종류 구분
+
+- 💡 리스트 **list**
+    - 순서가 있는 요소들의 컬렉션
+        - 크기가 변할 수 있는 배열
+    - 중복 허용
+- 💡셋 **set**
+    - 중복되지 않는 요소들의 컬렉션
+    - *기본적으로는* 순서가 없음
+- 💡맵 **map**
+    - 키와 값의 쌍으로 이루어진 요소들의 컬렉션
+    - 키는 중복될 수 없음
+        - 값은 중복 가능
+    - 키마다 하나의 값이 있음
+
+#### 스택(stack) vs 큐 (queue)
+
+- 스택 : 후입선출 (**L**ast **I**n **F**irst **O**ut)
+    - 나중에 들어온 것이 먼저 나옴
+- 큐 : 선입선출 (**Queue** : **F**irst **I**n **F**irst **O**ut)
+    - 먼저 들어간 것이 먼저 나옴
+- 예전에는 `Stack` 등의 클래스로 사용했었음
+    - 오늘날에는 다음 강에 배울 `LinkedList` 등으로 모두 구현
+
 ---
 </details>
 
+<details>
+<summary>리스트</summary>
+
+### [2. 리스트](./src/sec08/chap02)
+
+
+
+</details>
 
