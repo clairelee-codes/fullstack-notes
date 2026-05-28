@@ -8,7 +8,7 @@ public class NotCloneable {
     //  참조타입 필드들
     int[] numbers;
     Click click;
-    Click[] clicks;
+    Click[] clicks; // 이중 참조
 
     public NotCloneable(String title, int no, int[] numbers, Click click, Click[] clicks) {
         this.title = title;

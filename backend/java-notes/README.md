@@ -2,7 +2,7 @@
 
 ---
 
-## 2. 시작하기 
+## 2. 시작하기
 
 <details>
 <summary>주석, 자료형과 변수</summary>
@@ -41,6 +41,7 @@ final int INT_NUM = 1;
 ### [1. 정수 자료형들과 관련 연산자](./src/sec03/chap01)
 
 - long
+
 ```java
 // ⭐ int의 범위를 벗어나는 수에는 리터럴 끝에 l 또는 L 명시 필요
 long _8b_long1 = 123456789123456789L;
@@ -51,6 +52,7 @@ long _8b_long2 = 123_456_789_123_456_789L;
 ```
 
 - 명시적 형변환
+
 ```java
 int intNum = 12345;
 // ⚠ 강제로 범주 외의 값을 넣을 경우 값 손실
@@ -58,6 +60,7 @@ byte byteNum = (byte) intNum; // 💡 12345 % 128
 ```
 
 - 연산
+
 ```java
 byte b1 = 1;
 byte b2 = 2;
@@ -70,26 +73,30 @@ short s2 = 2;
 // short s4 = b1 + s2;
 // short s5 = s1 + s2;
 ```
+
 ```java
 long l1 = 1;
 long l2 = 2;
 // long끼리의 연산은 long 반환
 //int l3 = l1 + l2;
 ```
+
 ```java
 // ⚠ 정수 자료형의 계산은 소수점 아래를 '버림'
-byte int1 = 5/2;
+byte int1 = 5 / 2;
 int int2 = 10;
 int int3 = 3;
 int int4 = int2 / int3;
 ```
+
 ```java
 // 💡 자료형의 범위를 넘어가도록 숫자를 더하거나 뺄 경우 오버플로우
 byte x = 127;
-x += 1; // -128
+x +=1; // -128
 byte y = -128;
-y -= 1; // 127
+y -=1; // 127
 ```
+
 ```java
 // ⚠ 리터럴에는 단항연산자 사용 불가
 // int int5 = 3++;
@@ -112,6 +119,7 @@ boolean bool = 0.1 + 0.2 == 0.3; // false
 ```
 
 - double, float
+
 ```java
 // ⭐ double이 범위도 넓고, 정밀도도 높음 확인
 boolean bool1 = Float.MAX_VALUE < Double.MAX_VALUE;
@@ -122,6 +130,7 @@ double dblNum = 0.123456789123456789;   // 0.12345678912345678
 float fltNum = 0.123456789123456789f;   // 0.12345679;
 // float은 뒤에 f 또는 F를 붙여 표현
 ```
+
 ```java
 // ⭐ 큰 수(정확히 표현가능한 한도를 넘어서는)일 경우
 long lng2 = Long.MAX_VALUE; // 9223372036854775807
@@ -131,12 +140,14 @@ double dbl4 = lng2;         // 9.223372036854776E18
 ```
 
 - 연산
+
 ```java
 // float끼리의 연산은 float 반환
 float flt03 = flt01 + flt02;
 // float과 double의 연산은 double 반환
 //float flt04 = flt01 + dbl01; // ⚠ 불가
 ```
+
 ```java
 // 부동소수점 방식상 오차 자주 있음
 // 소수부가 2의 거듭제곱인 숫자간 연산은 오차 없음
@@ -144,6 +155,7 @@ double dbl07 = 0.25 * 0.5f;
 double dbl08 = 0.5 + 0.25 + 0.125 + 0.0625;
 double dbl09 = 0.0625f / 0.125;
 ```
+
 ```java
 // 💡 리터럴로 작성시 double임을 명시하려면 .0을 붙여줄 것
 double dbl5 = 5 / 2;
@@ -151,7 +163,7 @@ double dbl6 = 5.0 / 2;
 double dbl7 = (double) 5 / 2;
 
 // 💡 정수 자료형에 강제로 넣으면 소수부를 '버림'
- float fltNum = 4.567f;
+float fltNum = 4.567f;
 double dblNum = 5.678;
 int int2 = (int) fltNum;
 int int3 = (int) dblNum;
@@ -165,18 +177,25 @@ int int3 = (int) dblNum;
 <summary>문자 자료형, 불리언 자료형과 관련 연산자</summary>
 
 ### [3. 문자 자료형](./src/sec03/chap03)
+
 ```java
 // 💡 리터럴에 더할 때와 변수에 더할 때 반환 자료형이 다름
 char ch_a2 = 'A' + 1;
 // char ch_a3 = ch_a1 + 1; // ⚠️ 불가
 int int_a4 = ch_a1 + 1;
 ```
+
 ```java
 // 💡 아래의 기능으로 문자가 의미하는 정수로 변환
-int int_d1 = '1'-'0';
-int int_d2 = '5'-'0';
-int_d1 = Character.getNumericValue('1');
-int_d2 = Character.getNumericValue('2');
+int int_d1 = '1' - '0';
+int int_d2 = '5' - '0';
+int_d1 =Character.
+
+getNumericValue('1');
+
+int_d2 =Character.
+
+getNumericValue('2');
 ```
 
 ```java
@@ -188,11 +207,13 @@ boolean bool7 = '가' > '나';
 ---
 
 ### [4. 불리언 자료형과 관련 연산자](./src/sec03/chap04)
+
 ```java
 //  💡 &&가 ||보다 우선순위 높음
 boolean boolA = (num % 3 == 0) && (num % 2 == 0) || (num > 0) && (num > 10);
 boolean boolB = (num % 3 == 0) && ((num % 2 == 0) || (num > 0)) && (num > 10);
 ```
+
 ```java
 // 단축평가 short circuit
 int a = 1, b = 2, c = 0, d = 0, e = 0, f = 0;
@@ -200,9 +221,10 @@ int a = 1, b = 2, c = 0, d = 0, e = 0, f = 0;
 boolean bool1 = a < b && c++ < (d += 3);
 boolean bool2 = a < b || e++ < (f += 3);
 
-boolean bool3 = a > b && c++ < (d += 3); 
+boolean bool3 = a > b && c++ < (d += 3);
 boolean bool4 = a > b || e++ < (f += 3);
 ```
+
 ```java
 //  💡 삼항연산자도 단축평가 적용됨
 int changed1 = x < y ? (x += 2) : (y += 2);
@@ -216,6 +238,7 @@ int changed1 = x < y ? (x += 2) : (y += 2);
 <summary>문자열 자료형과 기초 사용법, 문자열의 메소드들</summary>
 
 ### [5. 문자열 자료형과 기초 사용법](./src/sec03/chap05)
+
 ```java
 // 리터럴로 생성
 String hl1 = "Hello";
@@ -256,6 +279,7 @@ int hl5hash = System.identityHashCode(hl5); // 1161082381
 ### [6. 문자열의 메소드들](./src/sec03/chap06)
 
 - concat
+
 ```java
  // concat은 필요시에만 새 인스턴스 생성
 String str_b1 = "ABC";
@@ -364,7 +388,7 @@ String[] strFormats = {
 //  이중 배열
 boolean[][] dblBoolAry = new boolean[3][3];
 
-int[][] dblIntAry = new int[][] {
+int[][] dblIntAry = new int[][]{
         //  ⭐️ 요소 배열의 크기가 다를 수 있음 // 배열의 주소가 들어감.
         {1, 2, 3},
         {4, 5},
@@ -376,9 +400,9 @@ int[][] dblIntAry = new int[][] {
 //  ⭐️ 문자열은 객체(참조형)지만 원시형처럼 다뤄짐
 String str1 = "코인 함";
 String str2 = "관심 없음";
-str2 = str1;
+str2 =str1;
 
-str1 = "고점에 익절";
+str1 ="고점에 익절";
 ```
 
 ```java
@@ -389,7 +413,7 @@ final int[] NUMBERS = {1, 2, 3, 4, 5};
 //NUMBERS = new int[] {2, 3, 4, 5, 6};
 
 //  ⭐️ 배열의 요소를 바꾸는 것은 가능
-NUMBERS[0] = 11;
+NUMBERS[0]=11;
 ```
 
 ---
@@ -447,14 +471,26 @@ int y_R_1 = 19 >> 1;    // 001001   // 19/2 몫
 //  💡 break 관련 동작방식을 이용
 char yutnori = '윷';
 
-switch (yutnori) {
-    case '모': System.out.println("앞으로");
-    case '윷': System.out.println("앞으로");
-    case '걸': System.out.println("앞으로");
-    case '개': System.out.println("앞으로");
-    case '도': System.out.println("앞으로"); break;
-    default:
-System.out.println("무효");
+switch(yutnori){
+        case'모':System.out.
+
+println("앞으로");
+    case'윷':System.out.
+
+println("앞으로");
+    case'걸':System.out.
+
+println("앞으로");
+    case'개':System.out.
+
+println("앞으로");
+    case'도':System.out.
+
+println("앞으로"); break;
+default:
+        System.out.
+
+println("무효");
 }
 ```
 
@@ -464,17 +500,24 @@ System.out.println("무효");
 
 ```java
 //  루프 블록 안에서 변수값을 바꾸는 것으로
-for (int i = 0; i < 10;) {
-    System.out.println(i);
-    i += 2;
-}
+for(int i = 0;
+i< 10;){
+        System.out.
+
+println(i);
+
+i +=2;
+        }
 ```
 
 ```java
 //  💡 쉼표로 구분하여 여럿 사용 가능
 //  ⚠️ 변수의 자료형은 한 종류만 가능 (혼용 안 됨)
-for (byte a = 0, b = 10; a <= b;) {
-    System.out.printf("a: %d, b: %d%n", a++, b--);
+for(byte a = 0, b = 10;
+a <=b;){
+        System.out.
+
+printf("a: %d, b: %d%n",a++, b--);
 }
 ```
 
@@ -483,46 +526,70 @@ for (byte a = 0, b = 10; a <= b;) {
 char yut = '윷';
 
 boolean isValid = false;
-for (int i = 0; i <= yuts.indexOf(yut); i++) {
-    isValid = true;
-    System.out.println("앞으로");
+for(
+int i = 0;
+i <=yuts.
+
+indexOf(yut);
+
+i++){
+isValid =true;
+        System.out.
+
+println("앞으로");
 }
-if (!isValid) System.out.println("무효");
+        if(!isValid)System.out.
+
+println("무효");
 ```
 
 - 무한루프
+
 ```java
 //  종료조건이 없는 for 루프
-for (;;) {
-    System.out.println("영원히");
+for(;;){
+        System.out.println("영원히");
 }
 // System.out.println("닿지 않아"); // ⚠️ 실행되지 않음
 ```
 
 - for - each
+
 ```java
 //  💡 for each 문법 - 배열이나 이후 배울 콜랙션 등에 사용
-for (String s : "호롤롤로".split("")) {
-    System.out.println(s);
+for(String s :"호롤롤로".
+
+split("")){
+        System.out.
+
+println(s);
 }
 ```
+
 - labe
+
 ```java
 //  💡 label : 중첩 루프에서 어느쪽을 continue, break 할 지 구분
 outer:
-for (int i = 0; i < 10; i++) {
+        for(
+int i = 0;
+i< 10;i++){
 
-    inner:
-    for (int j = 0; j < 10; j++) {
-        if (j % 2 == 0) continue inner;
-        if (i * j >= 30) continue outer;
+inner:
+        for(
+int j = 0;
+j< 10;j++){
+        if(j %2==0)continue inner;
+        if(i *j >=30)continue outer;
 
-        if (j > 8) break inner;
-        if (i - j > 7) break outer;
+        if(j >8)break inner;
+        if(i -j >7)break outer;
 
-        System.out.printf("i: %d, j: %d%n", i, j);
+        System.out.
+
+printf("i: %d, j: %d%n",i, j);
     }
-}
+            }
 ```
 
 ---
@@ -541,7 +608,7 @@ for (int i = 0; i < 10; i++) {
 ```java
 //  자바의 메소드는 하나의 값만 반환 가능
 //  여러 값을 반환하려면 배열 또는 객체 활용
-static int[] getMaxAndMin (int[] nums) {
+static int[] getMaxAndMin(int[] nums) {
 
     int max = nums[0];
     int min = nums[0];
@@ -550,11 +617,12 @@ static int[] getMaxAndMin (int[] nums) {
         min = min < num ? min : num;
     }
 
-    return new int[] {max, min};
+    return new int[]{max, min};
 }
 ```
 
 - ... 연산자
+
 ```java
 //  💡 ... 연산자 : 해당 위치 뒤로 오는 연산자들을 배열로 묶음
 //  int[] (배열 자체를 받음)과는 다름!
@@ -566,20 +634,21 @@ static double getAverage(int... nums) {
     return result / nums.length;
 }
 ```
+
 ```java
 static void main() {
 
-        double avg = getAverage(3, 91, 14, 27, 4);
+    double avg = getAverage(3, 91, 14, 27, 4);
 
-        //  💡 배열을 넣으면 자동으로 펼쳐져 인식됨
-        int[] numbers = {3, 91, 14, 27, 4};
-        double avgOfArr = getAverage(numbers);
+    //  💡 배열을 넣으면 자동으로 펼쳐져 인식됨
+    int[] numbers = {3, 91, 14, 27, 4};
+    double avgOfArr = getAverage(numbers);
 
-        String class3Desc = descClass(3, "목아진", "짱구", "철수", "훈이");
+    String class3Desc = descClass(3, "목아진", "짱구", "철수", "훈이");
 
-        String[] kids = {"짱구", "철수", "훈이"};
-        String class3DescByArr = descClass(3, "목아진", kids);
-    }
+    String[] kids = {"짱구", "철수", "훈이"};
+    String class3DescByArr = descClass(3, "목아진", kids);
+}
 ```
 
 ---
@@ -587,14 +656,21 @@ static void main() {
 ### [6. 메서드 더 알아보기](./src/sec04/chap06)
 
 - 오버로딩
+
 ```java
-static int add(int a, int b) { return a + b; }
+static int add(int a, int b) {
+    return a + b;
+}
 
 //  매개변수의 개수가 다름
-static int add(int a, int b, int c) { return a + b + c; }
+static int add(int a, int b, int c) {
+    return a + b + c;
+}
 
 //  매개변수의 자료형이 다름
-static double add(double a, double b) { return a + b; }
+static double add(double a, double b) {
+    return a + b;
+}
 
 //  ⚠️ 반환 자료형이 다른 것은 오버로딩 안 됨 - 다른 함수명 사용
 //  static double add(int a, int b) { return (double) (a + b); }
@@ -603,12 +679,13 @@ static double add(double a, double b) { return a + b; }
 - 재귀 메소드
 
 ```java
-static int factorial (int num) {
+static int factorial(int num) {
     return num == 0 ? 1 : num * factorial(--num);
 }
 ```
 
 꼬리 재귀 체적화
+
 - 재귀 코드를 내부적으로 루프 형태로 바꿔서 스택이 쌓이지 않도록 함
 - 자바에서는 현재 기본적으로 제공하지 않음.
 - 반복 횟수가 너무 많아지는 작업에는 사용하지 말것
@@ -635,12 +712,12 @@ public class YalcoChicken {
 
     //  ⭐ 생성자(constructor) : 인스턴스를 만드는 메소드
     //  ⭐ this : 생성될 인스턴스를 가리킴
-    public YalcoChicken (int no, String name) {
+    public YalcoChicken(int no, String name) {
         this.no = no;
         this.name = name;
     }
 
-    String intro () {
+    String intro() {
         // String name = "몽고반"; // 주석해제 시 name 대체 
         return "안녕하세요, %d호 %s점입니다."
                 .formatted(no, name);
@@ -658,15 +735,17 @@ public class YalcoChicken {
 
 - 클래스(static)요소: 메모지 중 한곳만 차지
 - 인스턴스 요소들: 각각이 메모리에 자리를 차지
-  - 각각의 자신만의 프로퍼티 값을 가지고 있음.
+    - 각각의 자신만의 프로퍼티 값을 가지고 있음.
 
 `YalcoChicken.java`
+
 ```java
 public class YalcoChicken {
     //  ⭐️ 클래스/정적 필드와 메소드들 : 본사의 정보와 기능
     //  인스턴스마다 따로 갖고 있을 필요가 없는 것들에 사용
     static String brand = "얄코치킨";
-    static String contact () {
+
+    static String contact() {
         //  ⚠️ 정적 메소드에서는 인스턴스 프로퍼티 사용 불가
         //  System.out.println(name);
 
@@ -681,7 +760,7 @@ public class YalcoChicken {
         this.name = name;
     }
 
-    String intro () {
+    String intro() {
         //  💡 인스턴스 메소드에서는 정적 프로퍼티 사용 가능
         return "안녕하세요, %s %d호 %s점입니다."
                 .formatted(brand, no, name);
@@ -690,6 +769,7 @@ public class YalcoChicken {
 ```
 
 `Main.java`
+
 ```java
 //  💡 클래스 필드와 메소드는 인스턴스를 생성하지 않고 사용
 String ycBrand = YalcoChicken.brand;
@@ -719,12 +799,13 @@ String st1Contact = store1.contact();
 
 | 접근 가능 범위           | public | protected | default | private |
 |--------------------|--------|-----------|---------|---------|
-| 해당 클래스 안에서         | ✅     | ✅        | ✅      | ✅      |
-| 동일 패키지 안에서         | ✅     | ✅        | ✅      | ❌      |
-| 다른 패키지의 자손 클래스 안에서 | ✅     | ✅        | ❌      | ❌      |
-| 다른 패키지 포함 어느 곳에서든  | ✅     | ❌        | ❌      | ❌      |
+| 해당 클래스 안에서         | ✅      | ✅         | ✅       | ✅       |
+| 동일 패키지 안에서         | ✅      | ✅         | ✅       | ❌       |
+| 다른 패키지의 자손 클래스 안에서 | ✅      | ✅         | ❌       | ❌       |
+| 다른 패키지 포함 어느 곳에서든  | ✅      | ❌         | ❌       | ❌       |
 
 - Getter와 Setter
+
 ```java
 private String name;
 private int price;
@@ -748,27 +829,30 @@ public void setPrice(int price) {
     this.price = price < max ? price : max;
 }
 ```
+
 </details>
 
 <details>
 <summary>상속</summary>
 
 ### [5. 상속](./src/sec05/chap05)
+
 `extends`키워드
 
 - **메소드 오버라이딩**  
-부모가 가진 같은 이름의 메소드를 자식이 다르게 정의
-  - **super**
-    - `super`: 부모의 클래스의 인스턴스(실존하지 않음 - 자신 안의 부모 유전자)를 가리킴
-      - `this` 가 해당 클래스의 인스턴스를 가리키듯…
-  - 부모 클래스에 생성자가 작성되었을 시
-    - 자식 클래스에도 생성자 작성 필요
-    - `super` 를 사용해서 부모의 생성자를 먼저 호출
-        - 즉 부모의 인스턴스부터 생성 후 이를 기반으로 자식 인스턴스 생성
-        - 자식 클래스의 생성자는 `super` 로 시작해야 함 (순서 바뀌면 안됨)
-  - 부모 클래스에 명시된 생서자가 없을 명우 자식 크랠스에서도 작성 필요 없음.
+  부모가 가진 같은 이름의 메소드를 자식이 다르게 정의
+    - **super**
+        - `super`: 부모의 클래스의 인스턴스(실존하지 않음 - 자신 안의 부모 유전자)를 가리킴
+            - `this` 가 해당 클래스의 인스턴스를 가리키듯…
+    - 부모 클래스에 생성자가 작성되었을 시
+        - 자식 클래스에도 생성자 작성 필요
+        - `super` 를 사용해서 부모의 생성자를 먼저 호출
+            - 즉 부모의 인스턴스부터 생성 후 이를 기반으로 자식 인스턴스 생성
+            - 자식 클래스의 생성자는 `super` 로 시작해야 함 (순서 바뀌면 안됨)
+    - 부모 클래스에 명시된 생서자가 없을 명우 자식 크랠스에서도 작성 필요 없음.
 
 `Button.java`
+
 ```java
 public class Button {
     private String print;
@@ -777,28 +861,30 @@ public class Button {
         this.print = print;
     }
 
-    public void func () {
+    public void func() {
         System.out.println(print + " 입력 적용");
     }
 }
 ```
 
 `ShutDownButton.java`
+
 ```java
 public class ShutDownButton extends Button {
-    public ShutDownButton () {
+    public ShutDownButton() {
         super("ShutDown"); // 💡 부모의 생성자 호출
     }
 
     //  💡 부모의 메소드를 override
     @Override
-    public void func () {
+    public void func() {
         System.out.println("프로그램 종료");
     }
 }
 ```
 
 ToggleButton.java
+
 ```java
 public class ToggleButton extends Button {
     private boolean on;
@@ -809,7 +895,7 @@ public class ToggleButton extends Button {
     }
 
     @Override
-    public void func () {
+    public void func() {
         super.func(); // 💡 부모에서 정의한 메소드 호출
         this.on = !this.on;
         System.out.println(
@@ -820,9 +906,9 @@ public class ToggleButton extends Button {
 ```
 
 - `@overerride` 어노테이션  
-부모의 특정 메소드를 오버라이드함을 명시
-  - 없어도 오류나지 않음.
-  - 메소드명이 다를 시 오류나타남. (메소드명 실수 방지)
+  부모의 특정 메소드를 오버라이드함을 명시
+    - 없어도 오류나지 않음.
+    - 메소드명이 다를 시 오류나타남. (메소드명 실수 방지)
 
 </details>
 
@@ -832,49 +918,55 @@ public class ToggleButton extends Button {
 ### [6. 다형성(Polymorphism)](./src/sec05/chap06)
 
 - 상속
-  - 자식 클래스의 인스턴스는 부모 클래스 자료형에 속함
-
+    - 자식 클래스의 인스턴스는 부모 클래스 자료형에 속함
 
 ```java
 //⭐️ 편의 : 모두 Button이란 범주로 묶어 배열 등에서 사용 가능
 Button[] buttons = {
-        new Button("Space"),
-        new ToggleButton("NumLock", false),
-        new ShutDownButton()
-};
+                new Button("Space"),
+                new ToggleButton("NumLock", false),
+                new ShutDownButton()
+        };
 
-for (Button button : buttons) {
-    //  ⭐️ 모든 Button들은 func 메소드를 가지므로
-    button.func();
+for(
+Button button :buttons){
+        //  ⭐️ 모든 Button들은 func 메소드를 가지므로
+        button.
+
+func();
 }
 ```
+
 ⭐️ 이처럼 특정 자료형의 자리에 여러 종류가 들어올 수 있는 것 - 다형성
 
 - `instaneof`연산자  
-뒤에 오는 클래스의 자료형에 속하는 인스턴스인지 확인  
-상속관계가 아닌 클래스끼리는 컴파일 오류
+  뒤에 오는 클래스의 자료형에 속하는 인스턴스인지 확인  
+  상속관계가 아닌 클래스끼리는 컴파일 오류
+
 ```java
 //  true
-        boolean typeCheck1 = button instanceof Button;
-        boolean typeCheck2 = toggleButton instanceof Button;
-        boolean typeCheck3 = shutDownButton instanceof Button;
+boolean typeCheck1 = button instanceof Button;
+boolean typeCheck2 = toggleButton instanceof Button;
+boolean typeCheck3 = shutDownButton instanceof Button;
 
-        //  false
-        boolean typeCheck4 = button instanceof ShutDownButton;
-        boolean typeCheck5 = button instanceof ToggleButton;
+//  false
+boolean typeCheck4 = button instanceof ShutDownButton;
+boolean typeCheck5 = button instanceof ToggleButton;
 
-        //  ⚠️ 컴파일 에러
-        // boolean typeCheck6 = toggleButton instanceof ShutDownButton;
-        // boolean typeCheck7 = shutDownButton instanceof ToggleButton;
+//  ⚠️ 컴파일 에러
+// boolean typeCheck6 = toggleButton instanceof ShutDownButton;
+// boolean typeCheck7 = shutDownButton instanceof ToggleButton;
 ```
 
 - `object` 클래스  
-모든 클래스의 최고 조상
+  모든 클래스의 최고 조상
+
 ```java
 Object[] objs = {
         1, false, 3.45, '가', "안녕하세요", new Button("Space")
 };
 ```
+
 </details>
 
 <details>
@@ -883,17 +975,18 @@ Object[] objs = {
 ### [7. 클래스의 final](./src/sec05/chap07)
 
 - `final` 필드
-  - 값 변경 불가
-  - 필드 선언시 또는 생성자에서 초기화해야 함 (수정이 불가능 하므로)
+    - 값 변경 불가
+    - 필드 선언시 또는 생성자에서 초기화해야 함 (수정이 불가능 하므로)
 - `final` 메서드
-  - 자식 클래스에서 오버라이드 불가
+    - 자식 클래스에서 오버라이드 불가
 - `final` 인스턴스
-  - 다른 값을 넣는 것은 불가
-  - 필드는 변경 가능 (다른 인스턴스(주소)로 바뀌는게 아니라서)
+    - 다른 값을 넣는 것은 불가
+    - 필드는 변경 가능 (다른 인스턴스(주소)로 바뀌는게 아니라서)
 - `final` 클래스
-  -  하위 확장 불가 (자식 클래스 만들 수 없음)
+    - 하위 확장 불가 (자식 클래스 만들 수 없음)
 
 `YalcoChicken.java`
+
 ```java
 public class YalcoChicken {
     protected static final String CREED = "우리의 튀김옷은 얄팍하다.";
@@ -907,18 +1000,19 @@ public class YalcoChicken {
         this.name = name;
     }
 
-    public void changeFinalFields () {
+    public void changeFinalFields() {
         // ⚠️ 불가. final 필드
         // this.no++;
     }
 
-    public final void fryChicken () {
+    public final void fryChicken() {
         System.out.println("염지, 반죽입히기, 튀김");
     }
 }
 ```
 
 `YalcoChickenDT.java`
+
 ```java
 public final class YalcoChickenDT extends YalcoChicken {
     public YalcoChickenDT(int no, String name) {
@@ -935,11 +1029,13 @@ public final class YalcoChickenDT extends YalcoChicken {
 ```
 
 `YalcoChickenHighWayDT.java`
+
 ```java
 // ⚠️ 불가. YalcoChickenDT가 final 클래스임.
 public class YalcoChickenHighWayDT extends YalcoChickenDT {
 }
 ```
+
 </details>
 
 <details>
@@ -948,22 +1044,23 @@ public class YalcoChickenHighWayDT extends YalcoChickenDT {
 ### [8. 추상 클래스](./src/sec05/chap08)
 
 - `abstract` 클래스
-  - 자식 클래스로 파생되기 위한 클래스
-  - 관련된 여러 클래스들의 공통분모를 정의하기 위한 클래스 (포유류)
-  - 그 자체로는 인스턴스 생성 불가
-  - 부모 클래스로서는 일반 클래스와 같음
-    - 다형성 구현됨
-  
+    - 자식 클래스로 파생되기 위한 클래스
+    - 관련된 여러 클래스들의 공통분모를 정의하기 위한 클래스 (포유류)
+    - 그 자체로는 인스턴스 생성 불가
+    - 부모 클래스로서는 일반 클래스와 같음
+        - 다형성 구현됨
+
 - `abstract` 메서드
-  - 추상 클래스에서만 사용 가능
-  - 스스로는 선언만 하고 구현사지는 않음
-    - 자식 클래스에서 반드시 구현. (아니면 컴파일 오류)
-    - 접근 제한자 의미 없음(어차피 자식클래스에서 구현해야하므로)
-      - 자식 클래스에서 접근 제한자 지정하면 됨
-    - 클래스(정적) 메소드는 추상 메소드로 작성할 수 없음
-      - 인스턴스를 생성해서 쓰는 것이 아니므로 맞지 않음
+    - 추상 클래스에서만 사용 가능
+    - 스스로는 선언만 하고 구현사지는 않음
+        - 자식 클래스에서 반드시 구현. (아니면 컴파일 오류)
+        - 접근 제한자 의미 없음(어차피 자식클래스에서 구현해야하므로)
+            - 자식 클래스에서 접근 제한자 지정하면 됨
+        - 클래스(정적) 메소드는 추상 메소드로 작성할 수 없음
+            - 인스턴스를 생성해서 쓰는 것이 아니므로 맞지 않음
 
 `YalcoGroup.java`
+
 ```java
 public abstract class YalcoGroup {
     protected static final String CREED = "우리의 %s 얄팍하다";
@@ -979,20 +1076,23 @@ public abstract class YalcoGroup {
         this.name = name;
     }
 
-    public String intro () {
+    public String intro() {
         return "%d호 %s점입니다.".formatted(no, name);
     }
 
     // abstract 메소드 
-    public abstract void takeOrder ();
+    public abstract void takeOrder();
 }
 ```
+
 `YalcoChicken.java`
+
 ```java
 public class YalcoChicken extends YalcoGroup {
-    public static String getCreed () {
+    public static String getCreed() {
         return CREED.formatted("튀김옷은");
     }
+
     protected static int lastNo = 0;
 
     public YalcoChicken(String name) {
@@ -1001,18 +1101,20 @@ public class YalcoChicken extends YalcoGroup {
 
     //  💡 반드시 구현 - 제거하면 컴파일 오류
     @Override
-    public void takeOrder () {
+    public void takeOrder() {
         System.out.printf("얄코치킨 %s 치킨을 주문해주세요.%n", super.intro());
     }
 }
 ```
 
 `YalcoCafe.java`
+
 ```java
 public class YalcoCafe extends YalcoGroup {
-    public static String getCreed () {
+    public static String getCreed() {
         return CREED.formatted("원두향은");
     }
+
     protected static int lastNo = 0;
 
     private boolean isTakeout;
@@ -1023,8 +1125,8 @@ public class YalcoCafe extends YalcoGroup {
     }
 
     //  💡 반드시 구현 - 제거하면 컴파일 오류
-    @Override 
-    public void takeOrder () {
+    @Override
+    public void takeOrder() {
         System.out.printf("얄코카페 %s 음료를 주문해주세요.%n", super.intro());
         if (!isTakeout) System.out.println("매장에서 드시겠어요?");
     }
@@ -1032,6 +1134,7 @@ public class YalcoCafe extends YalcoGroup {
 ```
 
 `Main.java`
+
 ```java
 //  ⚠️ abstract 클래스는 인스턴스 생성 불가
 // YalcoGroup yalcoGroup = new YalcoGroup(1, "서울");
@@ -1048,8 +1151,11 @@ YalcoGroup[] ycStores = {
         ycfStore1, ycfStore2
 };
 
-for (YalcoGroup ycStore : ycStores) {
-    ycStore.takeOrder();
+for(
+YalcoGroup ycStore :ycStores){
+        ycStore.
+
+takeOrder();
 }
 ```
 
@@ -1064,29 +1170,30 @@ for (YalcoGroup ycStore : ycStores) {
 
 **추상 클래스와의 차이**
 
-*🔴  : 추상 클래스 / 🔷  : 인터페이스*
+*🔴: 추상 클래스 / 🔷:인터페이스*
 
-- 🔴  포유류
-    - 북극곰 - 🔷  사냥, 🔷  수영
-    - 날다람쥐 - 🔷  비행
-- 🔴  파충류
-    - 거북 - 🔷  수영
-    - 날도마뱀 - 🔷  사냥, 🔷  수영, 🔷  비행
-- 🔴  조류
-    - 독수리 - 🔷  사냥, 🔷  비행
-    - 펭귄 - 🔷  사냥, 🔷  수영
+- 🔴 포유류
+    - 북극곰 - 🔷 사냥, 🔷 수영
+    - 날다람쥐 - 🔷 비행
+- 🔴 파충류
+    - 거북 - 🔷 수영
+    - 날도마뱀 - 🔷 사냥, 🔷 수영, 🔷 비행
+- 🔴 조류
+    - 독수리 - 🔷 사냥, 🔷 비행
+    - 펭귄 - 🔷 사냥, 🔷 수영
 
-| 구분                     | 추상 클래스                              | 인터페이스                                               |
-|--------------------------|-------------------------------------------|-----------------------------------------------------|
-| 기본 개념                | 물려 받는 것 (혈통/가문/계열)              | 장착하는 것 (학위/자격증)                                     |
-| 다중 적용                | 불가 (모회사는 하나 뿐)                  | 가능 (학위는 여럿 딸 수 있음)                                  |
-| 상속관계에 의한 제한     | 있음                                     | 없음                                                  |
-| 생성자                   | 가짐                                     | 가지지 않음                                              |
-| 메소드                   | 구상, 추상 모두 가능                     | 추상 메소드 (abstract 생략 가능), 구상(default) 메소드, 클래스(static) 메소드 |
-| 필드                     | 모두 가능                                | 상수만 가능 (public static final, 생략 가능)                 |
-| 적용 연산자              | extends                                  | implements                                          |
+| 구분          | 추상 클래스             | 인터페이스                                                     |
+|-------------|--------------------|-----------------------------------------------------------|
+| 기본 개념       | 물려 받는 것 (혈통/가문/계열) | 장착하는 것 (학위/자격증)                                           |
+| 다중 적용       | 불가 (모회사는 하나 뿐)     | 가능 (학위는 여럿 딸 수 있음)                                        |
+| 상속관계에 의한 제한 | 있음                 | 없음                                                        |
+| 생성자         | 가짐                 | 가지지 않음                                                    |
+| 메소드         | 구상, 추상 모두 가능       | 추상 메소드 (abstract 생략 가능), 구상(default) 메소드, 클래스(static) 메소드 |
+| 필드          | 모두 가능              | 상수만 가능 (public static final, 생략 가능)                       |
+| 적용 연산자      | extends            | implements                                                |
 
 `Mammal.java`
+
 ```java
 public abstract class Mammal {
     public boolean hibernation;
@@ -1098,23 +1205,27 @@ public abstract class Mammal {
 ```
 
 `Reptile.java`
+
 ```java
 public abstract class Reptile {
-    public boolean isColdBlooded () {
+    public boolean isColdBlooded() {
         return true;
     }
 }
 ```
 
 `Hunter.java`
+
 ```java
 public interface Hunter {
     String position = "포식자"; // ⭐️ final - 초기화하지 않을 시 오류
-    void hunt ();
+
+    void hunt();
 }
 ```
 
 `Swimmer.java`
+
 ```java
 public interface Swimmer {
     void swim();
@@ -1122,14 +1233,17 @@ public interface Swimmer {
 ```
 
 `Flyer.java`
+
 ```java
 public interface Flyer {
     String aka = "날짐승"; // ⭐️ final - 초기화하지 않을 시 오류
-    void fly ();
+
+    void fly();
 }
 ```
 
 `PolarBear.java`
+
 ```java
 public class PolarBear extends Mammal implements Hunter, Swimmer {
     public PolarBear() {
@@ -1149,6 +1263,7 @@ public class PolarBear extends Mammal implements Hunter, Swimmer {
 ```
 
 `GlidingLizard.java`
+
 ```java
 public class GlidingLizard extends Reptile implements Hunter, Swimmer, Flyer {
     @Override
@@ -1169,6 +1284,7 @@ public class GlidingLizard extends Reptile implements Hunter, Swimmer, Flyer {
 ```
 
 `Main.java`
+
 ```java
 //  ⭐ 다형성
 PolarBear polarBear = new PolarBear();
@@ -1183,8 +1299,11 @@ Hunter[] hunters = {
 };
 
 //  💡 인터페이스 역시 다형성에 의해 자료형으로 작용 가능
-for (Hunter hunter : hunters) {
-    hunter.hunt();
+for(
+Hunter hunter :hunters){
+        hunter.
+
+hunt();
 }
 ```
 
@@ -1193,6 +1312,7 @@ for (Hunter hunter : hunters) {
 **자바8에 추가된 기능들**
 
 인터페이스의
+
 - 클래스 메소스
 - default 구상 메소드
 
@@ -1205,36 +1325,45 @@ for (Hunter hunter : hunters) {
     - **하위호환성**
 
 `FoodSafety.java`
+
 ```java
 public interface FoodSafety {
     //  ⭐️
     //  static 제거하면 컴파일 오류
     //  static abstract는 역시 불가 (추상 클래스처럼)
-    static void announcement () {
+    static void announcement() {
         System.out.println("식품안전 관련 공지");
     }
 
     //  ⭐️
     //  default 제거하면 컴파일 오류
-    default void regularInspection () {
+    default void regularInspection() {
         System.out.println("정기 체크");
     }
 
     // 추상 메소드
-    void cleanKitchen ();
-    void employeeEducation ();
+    void cleanKitchen();
+
+    void employeeEducation();
 }
 ```  
 
 `Main.java`
+
 ```java
 FoodSafety.announcement();
 
 YalcoChicken store1 = new YalcoChicken();
 
-store1.regularInspection();
-store1.cleanKitchen();
-store1.employeeEducation();
+store1.
+
+regularInspection();
+store1.
+
+cleanKitchen();
+store1.
+
+employeeEducation();
 ```
 
 ---
@@ -1247,11 +1376,13 @@ store1.employeeEducation();
 ### [10. 싱글턴](./src/sec05/chap10)
 
 프로그램 상에서 특정 인스턴스가 딱 하나만 있어야 할 때
+
 - 프로그램상 여러 곳에서 공유되는 설정
 - 멀티쓰레딩 환경에서 공유되는 리소스
 - 기타 전역으로 공유되는 인스턴스가 필요한 경우
 
 `Setting.java`
+
 ```java
 public class Setting {
 
@@ -1285,18 +1416,22 @@ public class Setting {
 <summary>더 찾아본 내용</summary>
 
 ### 더 찾아본 내용
+
 **클래스(정적) 메소드는 자식 클래스에서 오버라이드 될 수 있을까?**
 
 **✔ 결론**
+
 - ❌ **오버라이드 불가능**
 - ⭕ 대신 **메서드 숨김(Method Hiding)** 발생
 
 **🔸 이유**
+
 - `static` 메서드는 **클래스 소속 (정적 바인딩)**
 - 호출 시점이 **컴파일 타임**에 결정됨
 - 따라서 **동적 바인딩(오버라이딩)**이 적용되지 않음
 
 **🔸 추가 개념**
+
 - `static` 메서드는 **추상 메서드로 선언할 수 없음**
     - 추상 메서드는 **인스턴스를 통해 구현/호출**되어야 함
     - `static`은 인스턴스와 무관 → 개념적으로 맞지 않음
@@ -1322,8 +1457,12 @@ class Child extends Parent {
 Parent p = new Child();
 Child c = new Child();
 
-p.hello(); // Parent
-c.hello();  // Child
+p.
+
+hello(); // Parent
+c.
+
+hello();  // Child
 ```
 
 </details>
@@ -1336,6 +1475,7 @@ c.hello();  // Child
 <summary>블록과 스코프, 패키지</summary>
 
 ### [1. 블록과 스코프](./src/sec06/chap01)
+
 ```java
 public class Ex02 {
     public static void main(String[] args) {
@@ -1347,12 +1487,12 @@ public class Ex02 {
     private int b = a + 1;
     // private int c = d + 1; // ⚠️ 메소드 내 변수의 스코프 : 해당 메소드 안
 
-    public void func1 () {
+    public void func1() {
         System.out.println(a + b);
         int d = 2;
     }
 
-    public void func2 () {
+    public void func2() {
         // System.out.println(d); // ⚠️
     }
 }
@@ -1361,18 +1501,20 @@ public class Ex02 {
 - 바깥의 변수 재선언 불가
 
 `Ex03.java`
+
 ```java
  String str = "바깥쪽";
     {
-        //String str = "안쪽"; // ⚠️ 불가
-    }
+            //String str = "안쪽"; // ⚠️ 불가
+            }
 
-    while (true) {
-        //String str = "안쪽"; // ⚠️ 불가
-    }
+            while(true){
+            //String str = "안쪽"; // ⚠️ 불가
+            }
 ```
 
 `Ex04.java`
+
 ```java
 public class Ex04 {
 
@@ -1382,7 +1524,7 @@ public class Ex04 {
 
     String king = "사자";
 
-    void printKings () {
+    void printKings() {
         String king = "여우"; // 💡 그럼 이건 뭔가요??
 
         //  ⭐️ 인스턴스의 필드는 다른 영역으로 간주
@@ -1407,12 +1549,14 @@ public class Ex04 {
 ### [3. 내부 클래스](./src/sec06/chap03)
 
 내부 클래스 종류
+
 - 멤버 인스턴스
 - 정적 내부 클래스
 - 메소드 안에 정의된 클래스
 - 익명 클래스
 
 `Outer.java`
+
 ```java
 public class Outer {
     private String inst = "인스턴스";
@@ -1424,7 +1568,7 @@ public class Outer {
         private String name = inst + " 필드로서의 클래스";
         private InnerSttcMember innerSttcMember = new InnerSttcMember();
 
-        public void func () {
+        public void func() {
             System.out.println(name);
         }
     }
@@ -1438,14 +1582,14 @@ public class Outer {
         //  ⚠️ static이 아닌 멤버 인스턴스 클래스에도 접근 불가!
         //  private InnerInstMember innerInstMember = new InnerInstMember();
 
-        public void func () {
+        public void func() {
             // ⚠️ 인스턴스 메소드지만 클래스가 정적(클래스의)이므로 인스턴스 필드 접근 불가
             //  name += inst;
             System.out.println(name);
         }
     }
 
-    public void memberFunc () {
+    public void memberFunc() {
         //  💡 3. 메소드 안에 정의된 클래스
         //  스코프가 메소드 내로 제한됨
         class MethodMember {
@@ -1454,7 +1598,7 @@ public class Outer {
             InnerInstMember innerInstMember = new InnerInstMember();
             InnerSttcMember innerSttcMember = new InnerSttcMember();
 
-            public void func () {
+            public void func() {
                 innerInstMember.func();
                 innerSttcMember.func();
                 System.out.println("메소드 안의 클래스");
@@ -1466,20 +1610,22 @@ public class Outer {
         new MethodMember().func();
     }
 
-    public void innerFuncs () {
+    public void innerFuncs() {
         new InnerInstMember().func();
         new InnerSttcMember().func();
     }
 
-    public InnerInstMember getInnerInstMember () {
+    public InnerInstMember getInnerInstMember() {
         return new InnerInstMember();
     }
 }
 ```
 
 `Main.java`
+
 ```java
 package sec06.chap03.ex01;
+
 // 내부 클래스
 public class Main {
     static void main(String[] args) {
@@ -1519,69 +1665,81 @@ public class Main {
 ### [4. 익명 클래스](./src/sec06/chap04)
 
 - 다른 클래스나 인터페이스로부터 상속받아 만들어짐
-  - 주로 오버라이드한 메소드를 사용
+    - 주로 오버라이드한 메소드를 사용
 - 한 번만 사용되고 버려질 클래스
-  - 따로 클래스명이 부여되지 않음
-  - 이후 다시 인스턴스를 생성할 필요가 없으므로
+    - 따로 클래스명이 부여되지 않음
+    - 이후 다시 인스턴스를 생성할 필요가 없으므로
 - 람다식이 나오기 전 널리 사용
 
 ```java
 public interface OnClickListener {
-    void onClick ();
+    void onClick();
 }
 ```
 
 ```java
 public class Button {
     String name;
+
     public Button(String name) {
         this.name = name;
     }
 
     //  ⭐️ 인터페이스를 상속한 클래스 자료형
     private OnClickListener onClickListener;
+
     public void setOnClickListener(OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
     }
 
-    public void func () {
+    public void func() {
         onClickListener.onClick();
     }
 }
 ```
 
 `Main.java`
+
 ```java
 Button button1 = new Button("Enter");
 Button button2 = new Button("CapsLock");
 Button button3 = new Button("ShutDown");
 
 //  이후 배울 람다로 대체
-button1.setOnClickListener(new OnClickListener() {
+button1.
+
+setOnClickListener(new OnClickListener() {
     @Override
-    public void onClick() {
+    public void onClick () {
         System.out.println("줄바꿈");
         System.out.println("커서를 다음 줄에 위치");
     }
 });
 
-button2.setOnClickListener(new OnClickListener() {
+        button2.
+
+setOnClickListener(new OnClickListener() {
     @Override
-    public void onClick() {
+    public void onClick () {
         System.out.println("기본입력 대소문자 전환");
     }
 });
 
-button3.setOnClickListener(new OnClickListener() {
+        button3.
+
+setOnClickListener(new OnClickListener() {
     @Override
-    public void onClick() {
+    public void onClick () {
         System.out.println("작업 자동 저장");
         System.out.println("프로그램 종료");
     }
 });
 
-for (Button button : new Button[] {button1, button2, button3}) {
-    button.func();
+        for(
+Button button :new Button[]{button1,button2,button3}){
+        button.
+
+func();
 }
 ```
 
@@ -1598,6 +1756,7 @@ for (Button button : new Button[] {button1, button2, button3}) {
 ### [6. 열거형](./src/sec06/chap06)
 
 지정된 선택지 내의 값을 받을 변수 사용시
+
 - 클래스처럼 필드, 생성자, 메소드를 가질 수 있음
 
 ```java
@@ -1619,14 +1778,19 @@ public enum YalcoChickenMenu {
         this.spicyLevel = spicyLevel;
     }
 
-    public String getName() { return name; }
-    public int getPrice() { return price; }
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
 
     public void setPrice(int price) {
         this.price = price;
     }
 
-    public String getDesc () {
+    public String getDesc() {
         String peppers = "";
         if (spicyLevel > 0) {
             peppers = "🌶️".repeat(spicyLevel);
@@ -1651,9 +1815,9 @@ public enum YalcoChickenMenu {
 - 데이터의 묶음을 저장하기 위한, 단순한 형태의 클래스
 
 - 레코드는 final
-  - 다른 클래스로 상속되거나 abstract 선언 불가
+    - 다른 클래스로 상속되거나 abstract 선언 불가
 - 레코드의 각 항목들은 private, final
-  - 각각 같은 이름의 getter가 기본으로 만들어짐.
+    - 각각 같은 이름의 getter가 기본으로 만들어짐.
 - 인스턴스 필드는 (자동으로 생성되며) 추가로 선언할 수 없음.
 - 클래스 필드는 가능 (static)
 
@@ -1662,35 +1826,50 @@ public record Child(
         String name,
         int birthYear,
         Gender gender
-) {}
+) {
+}
 ```
 
 ```java
-Child[] children = new Child[] {
-                new Child("김순이", 2021, Gender.FEMALE),
-                new Child("이돌이", 2019, Gender.MALE),
-                new Child("박철수", 2020, Gender.MALE),
-                new Child("최영희", 2019, Gender.FEMALE),
+Child[] children = new Child[]{
+        new Child("김순이", 2021, Gender.FEMALE),
+        new Child("이돌이", 2019, Gender.MALE),
+        new Child("박철수", 2020, Gender.MALE),
+        new Child("최영희", 2019, Gender.FEMALE),
 };
 
-for (Child child : children) {
-    System.out.printf(
+for(
+Child child :children){
+        System.out.
+
+printf(
             "%s %d년생 %s 어린이%n",
-            child.gender().getEmoji(),
-            child.birthYear(),
-            child.name()
+            child.gender().
+
+getEmoji(),
+            child.
+
+birthYear(),
+            child.
+
+name()
     );
 
 ```
 
-
 ```java
 public class Button {
     public enum ClickedBy {
-        LEFT('좌'), RIGHT('우') ;
+        LEFT('좌'), RIGHT('우');
         private char indicator;
-        ClickedBy(char indicator) { this.indicator = indicator; }
-        public char getIndicator() { return indicator; }
+
+        ClickedBy(char indicator) {
+            this.indicator = indicator;
+        }
+
+        public char getIndicator() {
+            return indicator;
+        }
     }
 
     //  ⭐️
@@ -1714,7 +1893,7 @@ public class Button {
         }
     }
 
-    public ClickInfo func (int x, int y, ClickedBy clickedBy) {
+    public ClickInfo func(int x, int y, ClickedBy clickedBy) {
         System.out.println("버튼 동작");
         return new ClickInfo(x, y, clickedBy);
     }
@@ -1729,25 +1908,25 @@ public class Button {
 
 ### [8. 유용한 라이브러리 클래스들](./src/sec06/chap08)
 
-- 숫자 관련 클래스들 
-  1. Math 클래스 
-  2. Random 클래스
-  3. BigInteger 클래스  
-  Long에서 다룰 수 있는 최대 정수 이상의 수를 다름
-  4. BigDecimal 클래스  
-  부동소수점 오차를 해결
+- 숫자 관련 클래스들
+    1. Math 클래스
+    2. Random 클래스
+    3. BigInteger 클래스  
+       Long에서 다룰 수 있는 최대 정수 이상의 수를 다름
+    4. BigDecimal 클래스  
+       부동소수점 오차를 해결
 
 
 - 문자열 관련 클래스들
-  1. StringJoiner  
-  받은 문자열들을 모아서 열고 닫는 문자열과 함께 join  
-  (String.join 보다 동정이고 강력)
-  2. StringBuffer  
-  자주 변경해야 하는 문자열이 있을 때 적합 (문자열을 여러 차례 이어붙일 때 등)
-  3. StringBuilder  
-  StringBuffer에서 멀티쓰레드 관련 안전 기능만 제거한 클래스
-  4. CharSequence 인터페이스  
-  String, StringBuffer, StringBuilder 모두 이를 구현
+    1. StringJoiner  
+       받은 문자열들을 모아서 열고 닫는 문자열과 함께 join  
+       (String.join 보다 동정이고 강력)
+    2. StringBuffer  
+       자주 변경해야 하는 문자열이 있을 때 적합 (문자열을 여러 차례 이어붙일 때 등)
+    3. StringBuilder  
+       StringBuffer에서 멀티쓰레드 관련 안전 기능만 제거한 클래스
+    4. CharSequence 인터페이스  
+       String, StringBuffer, StringBuilder 모두 이를 구현
 
 ---
 
@@ -1757,7 +1936,7 @@ public class Button {
 
 ---
 
-## 7.  클래스와 자료형
+## 7. 클래스와 자료형
 
 <details>
 <summary>Object</summary>
@@ -1768,33 +1947,36 @@ public class Button {
 - 필드 없이 메소드들만 갖고 있음
 
 - `@IntrinsicCandidate`: HotSpot VM (현재 대다수 JVM)에 의한 최적화
-  - 작성된 코드를 보다 효율적인 내부적 동작으로 덮어씀.
+    - 작성된 코드를 보다 효율적인 내부적 동작으로 덮어씀.
 - `native`: C, C++등 다른 언어로 작성된 코드를 호출하여 성능 향상
-  - Java Natice Interface 사용
+    - Java Natice Interface 사용
 
 #### `toString` 메소드
 
 - 기본적으로는 클래스명과 해시값을 반환
-- 오버라이드해서 유용한게 사용 
+- 오버라이드해서 유용한게 사용
 
 #### `equals` 메소드
 
 - 기본적으로는 `==`과 같이 레퍼런스 비교
-- 인스턴스 내용을 비교하려면 클래스마다 오버라이드해야 함 
+- 인스턴스 내용을 비교하려면 클래스마다 오버라이드해야 함
 
 #### `hashCode`메소드
 
 - 기본적으로는 각 인스턴스 고유의 메모리 위치값을 정수로 반환
 
 `Click.java`
+
 ```java
-     @Override
-     public int hashCode() {
-         return x * 100000 + y;
-     }
+
+@Override
+public int hashCode() {
+    return x * 100000 + y;
+}
 ``` 
 
 `Main.java`
+
 ```java
 Click click1 = new Click(123, 456, 5323487);
 Click click2 = new Click(123, 456, 5323487);
@@ -1838,6 +2020,7 @@ boolean str1eq2 = str1.equals(str2);
 - **깊은 복사**는 직접 오버라이드하여 구현해주어야 함.
 
 `NotCloneable.java`
+
 ```java
 public class NotCloneable {
     //  원시타입 필드들
@@ -1849,52 +2032,59 @@ public class NotCloneable {
     Click click;
     Click[] clicks;
 
-public NotCloneable(String title, int no, int[] numbers, Click click, Click[] clicks) {
-    this.title = title;
-    this.no = no;
-    this.numbers = numbers;
-    this.click = click;
-    this.clicks = clicks;
-}
+    public NotCloneable(String title, int no, int[] numbers, Click click, Click[] clicks) {
+        this.title = title;
+        this.no = no;
+        this.numbers = numbers;
+        this.click = click;
+        this.clicks = clicks;
+    }
 
-@Override
-protected Object clone() throws CloneNotSupportedException {
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
 
-    //  💡 아래 super의 clone : 필드들을 얕은복사 해주는 Object 메소드
-    //  - 원시타입 필드는 확실히 복사해줌. 참조타입은 참조복사만
+        //  💡 아래 super의 clone : 필드들을 얕은복사 해주는 Object 메소드
+        //  - 원시타입 필드는 확실히 복사해줌. 참조타입은 참조복사만
 
-    //  ⭐️ Cloneable을 구현하지 않은 클래스에서 호출하면 오류 발생!
-    //  - 아래의 코드를 호출 안 하면 오류가 나지 않지만
-    //  - 원시값 복사까지 일일이 구현해주어야 함
-    //    - 즉 clone을 오버라이드해서 쓰는 의미 없음
-    return super.clone();
+        //  ⭐️ Cloneable을 구현하지 않은 클래스에서 호출하면 오류 발생!
+        //  - 아래의 코드를 호출 안 하면 오류가 나지 않지만
+        //  - 원시값 복사까지 일일이 구현해주어야 함
+        //    - 즉 clone을 오버라이드해서 쓰는 의미 없음
+        return super.clone();
     }
 }
 ```
-  
+
 `Main.java`
+
 ```java
 NotCloneable notCloneable = new NotCloneable(
-            "클릭들 1", 1, new int[] {1, 2, 3},
-            new Click(12, 34),
-            new Click[] { new Click(12, 34), new Click(56, 78) }
-    );
+        "클릭들 1", 1, new int[]{1, 2, 3},
+        new Click(12, 34),
+        new Click[]{new Click(12, 34), new Click(56, 78)}
+);
 
 NotCloneable clone1 = null;
 
-try {
-    clone1 = (NotCloneable) notCloneable.clone();
-} catch (CloneNotSupportedException e) {
-    System.out.printf("⚠️ 복제중 오류 발생 : %s%n", notCloneable);
+try{
+clone1 =(NotCloneable)notCloneable.
+
+clone();
+}catch(
+CloneNotSupportedException e){
+        System.out.
+
+printf("⚠️ 복제중 오류 발생 : %s%n",notCloneable);
 }
 //  ⚠️ 복사 실패 - CloneNotSupportedException 이라는 오류 발생
 ```
-  
+
 `ShallowCopied.java`
+
 ```java
 public class ShallowCopied implements Cloneable {
-String title;
-int no;
+    String title;
+    int no;
 
     int[] numbers;
     Click click;
@@ -1917,32 +2107,39 @@ int no;
     }
 }
 ```
-  
+
 `Main.java`
+
 ```java
 ShallowCopied shallowCopied = new ShallowCopied(
-"클릭들 1", 1, new int[] {1, 2, 3},
-new Click(12, 34),
-new Click[] { new Click(12, 34), new Click(56, 78) }
+        "클릭들 1", 1, new int[]{1, 2, 3},
+        new Click(12, 34),
+        new Click[]{new Click(12, 34), new Click(56, 78)}
 );
 
 ShallowCopied clone2 = null;
-try {
-    clone2 = (ShallowCopied) shallowCopied.clone();
-} catch (CloneNotSupportedException e) {
-    //  오류가 나지 않으므로 실행되지 않음
-    System.out.printf("⚠️ 복제중 오류 발생 : %s%n", shallowCopied);
+try{
+clone2 =(ShallowCopied)shallowCopied.
+
+clone();
+}catch(
+CloneNotSupportedException e){
+        //  오류가 나지 않으므로 실행되지 않음
+        System.out.
+
+printf("⚠️ 복제중 오류 발생 : %s%n",shallowCopied);
 }
 
-shallowCopied.title = "제목 바뀜";
-shallowCopied.no = 2;
+shallowCopied.title ="제목 바뀜";
+shallowCopied.no =2;
 //  ⚠️ 참조 타입들은 완전히 복사되지 않음 (주소만 복사)
-shallowCopied.numbers[0] = 0;
-shallowCopied.click.x = 99;
-shallowCopied.clicks[0].x = 99;
+shallowCopied.numbers[0]=0;
+shallowCopied.click.x =99;
+shallowCopied.clicks[0].x =99;
 ```
-  
-`DeepCopied.java`  
+
+`DeepCopied.java`
+
 ```java
 public class DeepCopied implements Cloneable {
     String title;
@@ -1989,27 +2186,33 @@ public class DeepCopied implements Cloneable {
 ```
 
 `Main.java`
+
 ```java
 DeepCopied deepCopied = new DeepCopied(
-                "클릭들 1", 1, new int[] {1, 2, 3},
-                new Click(12, 34),
-                new Click[] { new Click(12, 34), new Click(56, 78) }
-        );
+        "클릭들 1", 1, new int[]{1, 2, 3},
+        new Click(12, 34),
+        new Click[]{new Click(12, 34), new Click(56, 78)}
+);
 
 DeepCopied clone3 = null;
 
-try {
-clone3 = (DeepCopied) deepCopied.clone();
-} catch (CloneNotSupportedException e) {
+try{
+clone3 =(DeepCopied)deepCopied.
+
+clone();
+}catch(
+CloneNotSupportedException e){
         //  오류가 나지 않으므로 실행되지 않음
-        System.out.printf("⚠️ 복제중 오류 발생 : %s%n", deepCopied);
+        System.out.
+
+printf("⚠️ 복제중 오류 발생 : %s%n",deepCopied);
 }
 
-deepCopied.title = "제목 바뀜";
-deepCopied.no = 2;
-deepCopied.numbers[0] = 0;
-deepCopied.click.x = 99;
-deepCopied.clicks[0].x = 99;
+deepCopied.title ="제목 바뀜";
+deepCopied.no =2;
+deepCopied.numbers[0]=0;
+deepCopied.click.x =99;
+deepCopied.clicks[0].x =99;
 
 ```
 
@@ -2070,6 +2273,7 @@ public class Main {
 #### 제네릭 클래스
 
 `Pocket.java`
+
 ```java
 //  원하는 자료형들로 세 개의 필드를 갖는 클래스
 public class Pocket<T1, T2, T3> {
@@ -2098,6 +2302,7 @@ public class Pocket<T1, T2, T3> {
 ```
 
 `Main.java`
+
 ```java
 public class Main {
     static void main(String[] args) {
@@ -2108,7 +2313,7 @@ public class Main {
         //  - (래퍼 클래스의 또 다른 존재 이유 -> 제네릭에 쓸려고)
         Pocket<Double, Double, Double> size3d1 =
                 new Pocket<>(123.45, 234.56, 345.67);
-        
+
         // <>를 사용 이유
         // > 를 붙이면 타입추론을 통해 자료형에 맞는 제네릭을 채워 넣게 되고, 
         // 그렇게 함으로써 의도한 바에 맞지 않은 자료형을 사용했을 때 
@@ -2126,7 +2331,7 @@ public class Main {
                 new Pocket<>("홍길동", 20, false);
 
         //  제네릭 클래스는 배열 생성시 new로 초기화 필수
-        Pocket<String, Integer, Boolean>[] people = new Pocket[] {
+        Pocket<String, Integer, Boolean>[] people = new Pocket[]{
                 new Pocket<>("홍길동", 20, false),
                 new Pocket<>("전우치", 30, true),
                 new Pocket<>("임꺽정", 27, true),
@@ -2138,13 +2343,14 @@ public class Main {
 #### 제한된 제네릭
 
 `Main.java`
+
 ```java
 public class Main {
     static void main(String[] args) {
 
         double sum1 = add2Num(12, 34.56);
         // double sum2 = add2Num("1" + true); // ⚠️ 불가
-        
+
         descHuntingMamal(new PolarBear());
         // descHuntingMamal(new GlidingLizard()); // ⚠️ 불가
 
@@ -2164,14 +2370,14 @@ public class Main {
     //  ⭐ 상속받는 클래스와 구현하는 인터페이스(들)을 함께 조건으로
     //  여기서는 클래스와 인터페이스 모두 extends 뒤에 &로 나열
     public static <T extends Mammal & Hunter & Swimmer>
-    void descHuntingMamal (T animal)  {
+    void descHuntingMamal(T animal) {
         //  ⭐️ 조건에 해당하는 필드와 메소드 사용 가능
         System.out.printf("겨울잠 %s%n", animal.hibernation ? "잠" : "자지 않음");
         animal.hunt();
     }
 
     public static <T extends Flyer & Hunter>
-    void descFlyingHunter (T animal) {
+    void descFlyingHunter(T animal) {
         animal.fly();
         animal.hunt();
     }
@@ -2179,21 +2385,23 @@ public class Main {
 ```
 
 `FormElement.java`
+
 ```java
 public abstract class FormElement {
-    public enum MODE { LIGHT, DARK }
+    public enum MODE {LIGHT, DARK}
 
     private static MODE mode = MODE.LIGHT;
 
-    public void printMode () {
+    public void printMode() {
         System.out.println(mode);
     }
 
-    abstract void func ();
+    abstract void func();
 }
 ```
 
 `Clickable.java`
+
 ```java
 public interface Clickable {
     void onClick();
@@ -2202,6 +2410,7 @@ public interface Clickable {
 ```
 
 `FormClicker.java`
+
 ```java
 public class FormClicker<T extends FormElement & Clickable> {
     private T formElem;
@@ -2212,11 +2421,11 @@ public class FormClicker<T extends FormElement & Clickable> {
 
     //  ⭐️ 조건의 클래스와 인터페이스의 기능 사용 가능
     //  - 자료형의 범위를 특정해주므로
-    public void printElemMode () {
+    public void printElemMode() {
         formElem.printMode();
     }
 
-    public void clickElem () {
+    public void clickElem() {
         formElem.onClick(); // 이 부분이 Clickable의 메소드
     }
 }
@@ -2225,34 +2434,37 @@ public class FormClicker<T extends FormElement & Clickable> {
 #### 와일드 카드
 
 `Horse.java`
+
 ```java
 public class Horse<T extends Unit> {
     private T rider;
 
-    public void setRider(T rider){
+    public void setRider(T rider) {
         this.rider = rider;
     }
 }
 ```
 
 `HorseShop.java`
+
 ```java
 public class HorseShop {
-    public static  void intoBestSellers (Horse<? extends Unit> horse){
+    public static void intoBestSellers(Horse<? extends Unit> horse) {
         System.out.println("베스트셀러 라인에 추가 - " + horse);
     }
 
-    public static  void intoPreminums (Horse<? extends  Knight> horse){
+    public static void intoPreminums(Horse<? extends Knight> horse) {
         System.out.println("프리미엄 라인에 추가 - " + horse);
     }
 
-    public  static void intoEntryLevels (Horse<? super Knight> horse){
-        System.out.println("보급형 라인에 추가 - " + horse );
+    public static void intoEntryLevels(Horse<? super Knight> horse) {
+        System.out.println("보급형 라인에 추가 - " + horse);
     }
 }
 ```
 
 `Main.java`
+
 ```java
 public class Main {
     static void main(String[] args) {
@@ -2360,6 +2572,7 @@ public class Main {
     }
 }
 ```
+
 ---
 
 ### [4. 게임 예제](./src/sec07/chap04)
@@ -2377,28 +2590,29 @@ public class Main {
 
 #### 널리 사용되는 컬렉션 클래스들
 
-🔴  :  추상 클래스  /  🔷  : 인터페이스  /  ⭐️  : 클래스
+🔴 : 추상 클래스 / 🔷 : 인터페이스 / ⭐️ : 클래스
 
 `📁 java.util` 패키지
 
 - 🔴 AbstractCollection - 🔷 Collection
     - 🔴 AbstractList - 🔷 List
-        - ⭐️  ArrayList
+        - ⭐️ ArrayList
         - 🔴 AbstractSequentialList
-            - ⭐️  LinkedList
-        - ⭐️  Vector
-            - ⭐️   Stack
+            - ⭐️ LinkedList
+        - ⭐️ Vector
+            - ⭐️ Stack
     - 🔴 AbstractSet - 🔷 Set
-        - ⭐️  HashSet
-            - ⭐️  LinkedHashSet
-        - ⭐️  TreeSet
+        - ⭐️ HashSet
+            - ⭐️ LinkedHashSet
+        - ⭐️ TreeSet
 - 🔴 AbstractMap - 🔷 Map
-    - ⭐️  HashMap
-        - ⭐️  LinkedHashMap
-    - ⭐️  TreeMap
+    - ⭐️ HashMap
+        - ⭐️ LinkedHashMap
+    - ⭐️ TreeMap
 
+#### 컬랙션 종류 구분
 
-####  컬랙션 종류 구분
+![컬랙션 종류 구분](./assets/Collection.png)
 
 - 💡 리스트 **list**
     - 순서가 있는 요소들의 컬렉션
@@ -2415,6 +2629,8 @@ public class Main {
 
 #### 스택(stack) vs 큐 (queue)
 
+![스택(stack) vs 큐 (queue)](./assets/Stack_vs_Queue.png)
+
 - 스택 : 후입선출 (**L**ast **I**n **F**irst **O**ut)
     - 나중에 들어온 것이 먼저 나옴
 - 큐 : 선입선출 (**Queue** : **F**irst **I**n **F**irst **O**ut)
@@ -2430,7 +2646,549 @@ public class Main {
 
 ### [2. 리스트](./src/sec08/chap02)
 
+#### `ArrayList`
 
+- 가장 많이 사용되는 컬렉션 클래스
+
+![ArrayList 이미지](./assets/ArrayList.png)
+
+- 배열과 달리, 크기가 동적으로 증가 가능
+    - 지정하지 않을 시 초기 공간 10
+        - 공간 _(capacity)_ ≠ 요소의 수 _(size)_
+    - 배열처럼 메모리상에 연속으로 나열
+        - 그래서 Array(배열)List
+    - 공간 초과 시 추가 공간 확보
+        - 더 넓은 공간을 확보한 뒤 요소들 복사
+            - 더 넓은 땅으로 이주하는 개념
+    - 중간의 요소 제거 시 이후 요소들 당겨옴
+- 용도
+    - 장점 : 각 요소들로의 접근이 빠름
+    - 단점 : 요소 추가/제거 시 성능 부하, 메모리 더 차지
+    - 변경이 드물고 빠른 접근이 필요한 곳에 적합
+
+#### `LinkedList`
+
+- Queue를 구현하는 용도로 사용 가능
+- 기능상 `ArrayList`와 대다수 주요 기능 공유
+
+![LinkedList 이미지](./assets/LinkedList.png)
+
+- 각 요소들이 메모리 이곳 저곳에 산재
+    - 각각 이전/다음 요소들로의 링크가 있음
+        - 비상연락망 체계…
+    - 요소 추가시 해당 요소의 메모리만 확보 후 링크
+    - 요소 제거시 그 이전 요소와 다음 요소 연결
+- 용도
+    - 장점 : 요소의 추가와 제거가 빠름, 메모리 절약
+    - 단점 : 요소 접근이 느림
+    - 요소들의 추가/제거가 잦은 곳에 적합
+
+#### 실무에서는 컬렉션 자료형을 인터페이스로
+
+```java
+List<Integer> intList = new ArrayList<>();
+intList =new LinkedList<>();
+
+Set<String> strSet = new HashSet<>();
+strSet =new TreeSet<>();
+
+Map<Integer, String> intStrMap = new HashMap<>();
+intStrMap =new TreeMap<>();
+```
+
+- `List` , `Set` , `Map` 등의 인터페이스로 변수, 인자, 제네릭 등의 자료형 지정
+    - 상세구현이 어떤 알고리즘으로 되어있는지는 굳이 드러내지 않음
+    - 필요에 따라 다른 종류로 교체가 용이
+
+---
+</details>
+
+<details>
+<summary>셋, 맵</summary>
+
+### [3. 셋](./src/sec08/chap03)
+
+| 주요 클래스          | 장점                        | 단점                     |
+|-----------------|---------------------------|------------------------|
+| `HashSet`       | 성능이 빠르고 메모리를 적게 사용        | 순서를 보장하지 않음            |
+| `LinkedHashSet` | 요소들을 입력 순서대로 유지           | `HashSet`보다 성능이 다소 떨어짐 |
+| `TreeSet`       | 요소들을 특정 기준으로 정렬 (기본 오름차순) | 추가/삭제 시 시간이 더 소모됨      |
+
+---
+
+### [4. 맵](./src/sec08/chap04)
+
+- 키 key와 값 value의 쌍
+- 키와 값의 자료형은 다양하게 가능
+- 키 값은 중복될 수 없음
+
+**해시맵과 트리맵**
+
+- 키를 저장하는 방식에 있어 해시셋/트리셋과 같음
+    - 해시맵: 키의 해시코드 / 키
+    - 트리맵: 키를 트리 형태로 저장
+- 정렬 무관 빠른 접근시에는 해시맵, 키순으로 정렬 필요시 트리맵
+
+---
+</details>
+
+<details>
+<summary>Comparable & Comparator</summary>
+
+### [5.Comparable & Comparator](./src/sec08/chap05)
+
+- 둘 모두 인터페이스
+- `Comparable` (비교의 대상): 자신과 다른 객체를 비교
+    - 숫자 클래드들, 불리언, 문자열
+    - `Date`, `BigDecimal`, `BigInteger` 등
+- `Comparator` (비교의 주체): 주어진 두 객체를 비교
+    - 컬렉션에서는 정렬의 기준으로 사용
+    - `Arrays`의 정렬 메소드, `TreeSet`이나 `TreeMap`등의 생성자에 활용
+
+`Person.java`
+
+```java
+public class Person implements Comparable<Person> {
+    private static int lastNo = 0;
+    private int no;
+    private String name;
+    private int age;
+    private double height;
+
+    public Person(String name, int age, double height) {
+        this.no = ++lastNo;
+        this.name = name;
+        this.age = age;
+        this.height = height;
+    }
+
+    public int getNo() {
+        return no;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    @Override
+    public int compareTo(Person p) {
+        return this.getName()
+                .compareTo(p.getName());
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "no=" + no +
+                ", name'" + name + '\'' +
+                ", age=" + age +
+                ", height=" + height +
+                '}';
+    }
+}
+```
+
+`PersonComp.java`
+
+```java
+public class PersonComp implements Comparator<Person> {
+    public enum SortBy {NO, NAME, AGE, HEIGHT}
+
+    public enum SortDir {ASC, DESC}
+
+    private SortBy sortBy;
+    private SortDir sortDir;
+
+    public PersonComp(SortBy sortBy, SortDir sortDir) {
+        this.sortBy = sortBy;
+        this.sortDir = sortDir;
+    }
+
+    @Override
+    public int compare(Person o1, Person o2) {
+        int result = 0;
+        switch (sortBy) {
+            case NO:
+                result = o1.getNo() > o2.getNo() ? 1 : -1;
+                break;
+            case NAME:
+                result = o1.getName()
+                        .compareTo(o2.getName());
+                break;
+            case AGE:
+                result = o1.getAge() > o2.getAge() ? 1 : -1;
+                break;
+            case HEIGHT:
+                result = o1.getHeight() > o2.getHeight() ? 1 : -1;
+                break;
+        }
+
+        return result * (sortDir == SortDir.ASC ? 1 : -1);
+    }
+}
+```
+
+`Main.java`
+
+```java
+public class Main {
+    static void main(String[] args) {
+        TreeSet[] treeSets = {
+                new TreeSet<>(),    // name기준으로 정렬됨.
+                new TreeSet<>(new PersonComp(PersonComp.SortBy.NO, PersonComp.SortDir.DESC)),
+                new TreeSet<>(new PersonComp(PersonComp.SortBy.AGE, PersonComp.SortDir.ASC)),
+                new TreeSet<>(new PersonComp(PersonComp.SortBy.HEIGHT, PersonComp.SortDir.DESC))
+        };
+
+        for (Person p : new Person[]{
+                new Person("홍길동", 20, 174.5),
+                new Person("전우치", 28, 170.2),
+                new Person("임꺽정", 24, 183.7),
+                new Person("황대장", 32, 168.8),
+                new Person("붉은매", 18, 174.1)
+        }) {
+            for (TreeSet ts : treeSets) {
+                ts.add(p);
+            }
+        }
+
+        for (TreeSet ts : treeSets) {
+            for (Object p : ts) {
+                System.out.println(p);
+            }
+            System.out.println("\n- - - - -\n");
+        }
+    }
+}
+```
+
+---
+</details>
+
+<details>
+<summary>이터레이터</summary>
+
+### [6. 이터레이터](./src/sec08/chap06)
+
+- `java.lang.Iterable` 인터페이스 구현 클래스에서 사용
+- 컬렉션을 순회하는데 사용
+    - 투어가이드, 순시 감찰관 역할
+    - 특정 기준의 요소들 제거에 유용
+    - 순회 상태가 저장될 필요가 있을 때 유용
+
+`Main.java`
+
+```java
+Set<Integer> intHSet = new HashSet<>(
+        Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9)
+);
+// 이레이터 반환 및 초기화
+// - 기타 Collection 인터페이스를 구현한 클래스들에도 존재
+Iterator<Integer> intItor = intHSet.iterator();
+
+// next : 자리를 옮기며 다음 요소 반환
+Integer int1 = intItor.next();
+Integer int2 = intItor.next();
+Integer int3 = intItor.next();
+
+// hasNext : 순회가 끝났는지 여부 반환
+boolean hasNext = intItor.hasNext();
+
+// 순회 초기화
+intItor =intHSet.
+
+iterator();
+
+// remove : 현 위치의 요소 삭제
+while(intItor.
+
+hasNext()){
+        if(intItor.
+
+next()%3==0){
+        intItor.
+
+remove();
+    }
+            }
+
+// foreach 문으로 시도하면 오류
+// for(Integer num : intHSet)
+// {
+//     if(num%3 ==0) intHSet.remove(num);
+// }
+```
 
 </details>
 
+---
+
+## 9. 함수형 프로그래밍
+
+<details>
+<summary>람다식과 함수형 인터페이스</summary>
+
+### [1. 람다식과 함수형 인터페이스](./src/sec09/chap01)
+
+#### 람다식 lambda expression
+
+- 자바8에 추가된 기능
+- 메서드를 간단히 식 expression으로 표현
+- **익명 함수** anonymous function이라고도 부름.
+- 자바에서는 인터페이스의 익명 클래스를 간략히 표현하는데 사용됨
+
+#### 함수형 인터페이스 FunctionalInterface
+
+- 람다식 형태로 익명 클래스가 만들어질 수 있는 인터페이스
+    - 조건: 추상 메소드가 하나(만)있어야 함
+        - 람다식과 1:1로 대응될 수 있어야 하므로
+        - `@FunctionalInterface`로 강제
+        - 클래스 메소드와 `default`메소드는 여럿 있을 수 있음
+        - ⭐ 예외: `java.util.Comparator`는 함수형 인터페이스지만 추상 메소드가 둘
+            - 자바 8 (함수형 인터페이스 등장)이전에 만들어진 클래스이기 때문
+            - 사용자가 정의할 부분은 `compare`메소드만
+                - `equals`는 이미 Object 클래스에 있으므로 구현 대상이 아님
+
+`Printer.java`
+
+```java
+
+@FunctionalInterface
+public interface Printer {
+    void print();
+
+    // void say (); // ⚠️ 둘 이상의 메소드는 불가
+}
+```
+
+`Main.java`
+
+```java
+Printer printer1 = new Printer() {
+    @Override
+    public void print() {
+        System.out.println("람다식이 없었을 때 방식");
+    }
+};
+
+Printer printer2 = () -> {
+    System.out.println("인자도 반환값도 없는 람다식");
+};
+Printer printer3 = () -> System.out.println("반환값 없을 시 { } 생략 가능");
+Printer printer4 = () -> {
+    System.out.println("코드가 여러 줄일 때는");
+    System.out.println("{ } 필요");
+};
+
+for(
+Printer p :new Printer[]{printer1,printer2,printer3,printer4}){
+        p.
+
+print();
+}
+```
+
+---
+</details>
+
+<details>
+<summary>java.util.function패키지</summary>
+
+### [2. java.util.function패키지](./src/sec09/chap02)
+
+- 자바는 람다식을 위한 함수형 인터페이스가 정의되어 있어야 함.
+    - 필요할 때마다 정의해야하므로 번거로움
+    - 자주 사용하는 인터페이스가 java.util.function패키지에 제공
+    - 스트림에서 유용하게 사용
+
+| 함수형 인터페이스                    | 메서드      | 인자(들) 타입 | 반환값 타입    |
+|------------------------------|----------|----------|-----------|
+| `Runnable` (`java.lang` 패키지) | `run`    | 없음       | `void`    |
+| `Supplier<T>`                | `get`    | 없음       | `T`       |
+| `Consumer<T>`                | `accept` | `T`      | `void`    |
+| `BiConsumer<T, U>`           | `accept` | `T, U`   | `void`    |
+| `Function<T, R>`             | `apply`  | `T`      | `R`       |
+| `BiFunction<T, U, R>`        | `apply`  | `T, U`   | `R`       |
+| `Predicate<T>`               | `test`   | `T`      | `boolean` |
+| `BiPredicate<T, U>`          | `test`   | `T, U`   | `boolean` |
+| `UnaryOperator<T>`           | `apply`  | `T`      | `T`       |
+| `BinaryOperator<T>`          | `apply`  | `T, T`   | `T`       |
+
+---
+</details>
+
+<details>
+<summary>메소드 참조</summary>
+
+### [3. 메소드 참조](./src/sec09/chap03)
+
+- Method reference
+    - 람다식이 어떤 메소드 하나만 호출할 때 코드를 간편화
+        - 즉 해당 람다식과 메소드의 의미가 사실상 같을 때
+    - 해당 메소드가 인터페이스와 인자, 리턴값 구성이 동일할 때
+
+```shell
+# 클래스 메소드 호출
+{클래스명}::{클래스 메소드명}
+
+# 인스턴스 메소드 호출
+{클래스명}::{인스턴스메소드명}
+{인스턴스}::{인스턴스메소드명}
+
+# 클래스 생성자 호출
+{클래스}::new
+```
+
+`Button.java`
+
+```java
+public class Button {
+    private String text;
+    private Runnable onClickListener;
+
+    public Button(String text) {
+        this.text = text;
+    }
+
+    public Button(String text, String sound) {
+        this(text);
+        onClickListener = () -> System.out.println(sound + " " + sound);
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setOnClickListener(Runnable onClickListener) {
+        this.onClickListener = onClickListener;
+    }
+
+    public void onClick() {
+        onClickListener.run();
+    }
+}
+```
+
+`Main.java`
+
+```java
+public class Main {
+    static void main(String[] args) {
+
+        // 클래스의 클래스 메소드에 인자 적용하여 실행
+        Function<Integer, String> intToStrLD = (i) -> String.valueOf(i);
+        Function<Integer, String> intToStrMR = String::valueOf;
+        String intToStr = intToStrMR.apply(123);
+
+        // 클래스의 생성자 실행
+        Function<String, Button> strToButtonLD = s -> new Button(s);
+        Function<String, Button> strToButtonMR = Button::new;
+        Button button1 = strToButtonMR.apply("Dog");
+
+        BiFunction<String, String, Button> twoStrToButtonLD = (s1, s2) -> new Button(s1, s2);
+        BiFunction<String, String, Button> twoStrToButtonMR = Button::new;
+        Button button2 = twoStrToButtonMR.apply("고양이", "야옹");
+        button2.onClick();
+
+        System.out.println("\n- - - - -\n");
+
+        // 현존하는 인스턴스의 메소드 실행
+        Runnable catCryLD = () -> button2.onClick();
+        Runnable catCryMR = button2::onClick;
+        catCryMR.run();
+
+        // 임의의 인스턴스의 메소드 참조
+        TreeSet<String> treeSetLD = new TreeSet<>((s1, s2) -> s1.compareTo(s2));
+        TreeSet<String> treeSetMR = new TreeSet<>(String::compareTo);
+    }
+}
+```
+
+---
+</details>
+
+<details>
+<summary>스트림</summary>
+
+### [4. 스트림](./src/sec09/chap04)
+
+- 연속되는 요소들의 흐름
+- 일련된 데이터를 연속적으로 가공하는데 유용
+    - 내부적으로 수행 - 중간과정이 밖으로 드러나지 않음
+        - 외부에 변수등이 만들어지지 않음
+    - 배열, 콜렉션,I/o 등을 동일한 프로세스로 가공
+    - 함수형 프로그래밍을 위한 다양한 기능들 제공
+    - 원본을 수정하지 않음 - 정렬 등에 영향받지 않음
+- 멀티쓰레딩에서 병렬처리 가능
+
+`Ex01.java`
+
+```java
+// 스트림을 사용한 방식
+String oddsStrStreamed = int0To9
+                .stream()
+                .filter(i -> i % 2 == 1)
+                .sorted(Integer::compare)
+                .map(String::valueOf)
+                .collect(Collectors.joining(","));
+
+// 함수형인터페이스 메소드참조형 풀어쓴것
+// String oddsStrStreamed = int0To9
+//         .stream()
+//         .filter(new Predicate<Integer>() {
+//             @Override
+//             public boolean test(Integer i) {
+//                 return i % 2 == 1;
+//             }
+//         })
+//         .sorted(new Comparator<Integer>() {
+//             @Override
+//             public int compare(Integer a, Integer b) {
+//                 return Integer.compare(a, b);
+//             }
+//         })
+//         .map(new Function<Integer, String>() {
+//             @Override
+//             public String apply(Integer i) {
+//                 return String.valueOf(i);
+//             }
+//         })
+//         .collect(Collectors.joining(","));
+```
+
+---
+</details>
+
+<details>
+<summary>스트림 연산</summary>
+
+### [5. 스트림 연산](./src/sec09/chap05)
+
+| 연산                      | 종류 | 설명                                              |
+|-------------------------|----|-------------------------------------------------|
+| `peek`                  | 중간 | 연산 과정 중 스트림에 영향을 끼치지 않으면서 주어진 `Consumer` 작업을 실행 |
+| `filter`                | 중간 | 주어진 `Predicate`에 충족하는 요소만 남김                    |
+| `distinct`              | 중간 | 중복되지 않는 요소들의 스트림을 반환                            |
+| `map`                   | 중간 | 주어진 `Function`에 따라 각 요소들을 변경                    |
+| `sorted`                | 중간 | 요소들을 정렬                                         |
+| `limit`                 | 중간 | 주어진 수 만큼의 요소들을 스트림으로 반환                         |
+| `skip`                  | 중간 | 앞에서 주어진 개수만큼의 요소를 제거                            |
+| `takeWhile / dropWhile` | 중간 | 주어진 `Predicate`를 충족하는 동안 취하거나 건너뜀               |
+| `forEach`               | 최종 | 각 요소들에 주어진 `Consumer`를 실행                       |
+| `count`                 | 최종 | 요소들의 개수를 반환                                     |
+| `min / max`             | 최종 | 주어진 `Comparator`에 따라 최소/최대값을 반환                 |
+| `reduce`                | 최종 | 주어진 초기값과 `BinaryOperator`로 값들을 하나의 값으로 접어 나감    |
+
+- 이 외 병렬 연산 및 `Optional`  관련 연산자들은 이후에
+
+</details>
+
+---
