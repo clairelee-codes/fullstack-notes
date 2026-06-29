@@ -1,0 +1,204 @@
+오후 9:59 2026-06-28
+
+🗂️ 질문 리스트
+Q1. JavaScript 함수와 객체 생성
+"함수는 실행시킬 때 새로운 object가 생성되는지 알았는데 JS에서는 맞아?"
+
+키워드: 함수 호출, 객체 생성, new 키워드, 생성자 함수, 참조 동일성, 함수도 객체
+
+Q2. 컴포넌트 리렌더링과 변수
+"컴포넌트 함수가 다시 실행되는 거지? 그럼 그 안의 변수들은 다시 값이 다 바뀌는 거지?"
+
+키워드: 리렌더링, 함수 재실행, 지역 변수 초기화, useState, 상태 유지, 참조 변경, useMemo, useCallback
+
+Q3. 실전 예시 - SearchPage와 useDebounce
+"검색어가 바뀔 때마다 SearchPage 컴포넌트와 그 안의 useDebounce가 실행되는 거네?"
+
+키워드: 커스텀 훅, useDebounce, 디바운싱, setTimeout, clearTimeout, cleanup 함수, 의존성 배열
+
+Q4. useEffect 실행 시점
+"useEffect는 언제 실행되는 거야?"
+
+키워드: useEffect 실행 시점, 렌더링 후 실행, 의존성 배열, 마운트, 언마운트, cleanup, useLayoutEffect, 실행 순서
+
+Q5. useEffect 내부의 setState
+"useEffect 내에서 useState를 set으로 바꾸면 어떻게 됨?"
+
+키워드: effect 안에서 setState, 리렌더링 트리거, 무한 루프, 의존성 배열 함정, 안티패턴, 안전한 패턴
+
+Q6. useEffect + setState의 비효율성
+"useEffect 안에서 setState 부르면 렌더링이 또 일어나는데 불편한 거 아니야?"
+
+키워드: 더블 렌더링, 렌더링 비, You Might Not Need an Effect, 파생 상태, 렌더링 중 계,산 안티패턴, React 철학
+
+Q7. 외부 시스템과 useEffect
+"외부와 연결할 때는 왜 useEffect를 써야 하는 거야?"
+
+키워드: 순수 함수, side effect (부수 효과), 렌더링 순수성, 외부 시스템 동기화 ,API 호,출 타이머, 이벤트 리스너, 메모리 누수, Strict Mode
+
+🎯 블로그 시리즈 구성안 (추천)
+시리즈 제목: "React, 왜 그렇게 동작할까?"
+회차	제목	다루는 질문
+1편	JS 함수, 호출할 때마다 객체가 새로 만들어질까?	Q1
+2편	React 컴포넌트는 매번 처음부터 다시 실행된다	Q2
+3편	useDebounce로 알아보는 커스텀 훅의 동작 원리	Q3
+4편	useEffect는 정확히 언제 실행되는가?	Q4
+5편	useEffect 안의 setState, 안전한가?	Q5
+6편	"You Might Not Need an Effect" — 진짜로?	Q6
+7편	왜 외부 시스템은 꼭 useEffect로 처리해야 할까?	Q7
+📖 참고 자료 (블로그에 첨부 추천)
+React 공식 문서: You Might Not Need an Effect
+React 공식 문서: Synchronizing with Effects
+React 공식 문서: Lifecycle of Reactive Effects
+MDN: JavaScript 함수와 객체
+💡 블로그 작성 팁 (스스로에게)
+ 각 글마다 "내가 헷갈렸던 이유" 섹션 꼭 넣기
+ 코드 예시는 ❌ 나쁜 예 / ✅ 좋은 예 비교로 보여주기
+ 어려운 개념은 비유로 설명 (예: 레시피 vs 실제 요리)
+ 한 줄 요약을 마지막에 꼭 넣기
+ 본인의 친근한 말투 유지하기 ("인 거지?", "인 거네")
+ 시리즈 간 링크 걸어서 연결성 만들기
+🔑 핵심 깨달음 (잊지 말기!)
+함수 호출 ≠ 새 객체 생성 (단, new, 리턴, 내부 정의는 예외)
+컴포넌트는 리렌더마다 처음부터 다시 실행된다
+useState는 React가 외부에서 값을 기억해주는 장치
+useEffect는 렌더링 완료 후에 실행된다
+렌더링은 순수해야 한다 → 부수 효과는 useEffect로 분리
+effect에서 setState는 리렌더를 한 번 더 일으킨다 → 가능하면 피하기
+외부 시스템(API, 타이머, DOM 등)과의 동기화가 useEffect의 진짜 용도
+
+오후 9:59 2026-06-27
+
+{...movieSelected} 스프레드 연산자
+... 없으면 개별로 못 받아?
+<Route element={<Layout/>}> 중괄호 쓰는 이유
+<Layout/>이 왜 JavaScript? HTML 아니야?
+<div><Nav/></div>는 HTML 아니야?
+JSX인데 왜 중괄호가 없어?
+path="/"는 왜 중괄호 안 써?
+path=":movieId" 문자열인 이유
+<Layout/>은 JSX인가?
+<div>도 JSX인가?
+export default function은 JS인가?
+
+라우터 / 페이지 이동
+Vite는 index.js 없는데?
+CRA의 index.js는 어떻게 생겼어?
+StrictMode를 BrowserRouter로 바꾸면 돼?
+navigate('/search?q=...') 동작
+useQuery 어디서 사용?
+navigate하면 바로 페이지 넘어가?
+한 글자 칠 때마다 SearchPage 렌더링되는지
+재렌더링될 때마다 useEffect 실행되는지 (의존성 배열)
+
+
+오후 9:59 2026-06-26
+
+📋 질문 리스트
+Netflix 클론 프로젝트 시작 (Vite + React 설정)
+Vite에서 JSX 파싱 에러 (.js vs .jsx)
+CRA vs Vite 확장자 차이
+npm run start vs npm run dev
+다음 줄 삽입 단축키 (Ctrl + Enter)
+object-fit: contain
+flexbox CSS 속성 (justify-content, align-items, transition)
+템플릿 리터럴 + && 연산자 (className 조건부)
+&& 연산자 동작 (truthy/falsy)
+useEffect 실행 시점
+이벤트 리스너 등록/제거 (cleanup)
+useEffect 렌더링과 이벤트 관계
+useEffect 문법 정리
+Vite 500 에러 (.js → .jsx)
+Vite 404 에러 (캐시 문제)
+Banner 컴포넌트 console.log 두 번 실행 (StrictMode)
+CRA에서도 두 번 실행되는지 (React 18+ 차이)
+Math.floor(Math.random() * length)
+object-fit: contain 재질문
+CORB (Cross-Origin Read Blocking)
+CORB 에러 해결 (Banner 코드)
+/undefined URL 문제
+useEffect와 return 실행 순서
+초기값: {} vs initialMovie vs null
+함수 호이스팅 (function vs 화살표 함수)
+banner--fadeBottom (그라데이션)
+h1 색상 안 바뀌는 문제 (전역 스타일)
+body margin 8px (브라우저 기본)
+axios가 HTML 응답 (잘못된 import)
+Status 204 No Content
+Row props 받는 법 (구조 분해 할당)
+🎯 주요 학습 포인트
+Vite: .jsx 확장자 필수
+useEffect: 렌더링 후 실행, cleanup 중요
+React 18+: StrictMode에서 2번 실행
+CORB: 잘못된 URL → 데이터 로딩 전 처리 필수
+axios instance: baseURL 분리 관리
+Props: 구조 분해 { } 필수
+CSS: 전역 스타일 최소화
+
+오후 9:59 2026-06-25
+
+오늘 질문 정리 📝
+React 기초
+React 16.8 Hooks 설명
+JS의 후크와 React Hooks 차이
+React Hooks가 라이브러리인지
+용어/개념
+마운트(Mount) 뜻
+디펜던시(Dependency) 뜻
+호이스팅(Hoisting)
+JS에서 this는 항상 window인지
+JavaScript 문법
+함수 선언 시 function 키워드 사용/미사용
+export와 export default 차이
+export 없으면 내보낼 수 있는지
+Java 접근제한자 vs JS export 비교
+클래스 필드에 const/let/var 사용 가능 여부
+함수형 vs 클래스형의 const 차이
+Java와 JS 클래스 차이
+React 실습
+class 컴포넌트를 함수형으로 변환
+Vite 프로젝트의 진입점 (main.jsx)
+App.jsx 파일 분리 방법
+파일명 바꾸면 클래스명도 바꿔야 하는지
+map에서 객체 수정하면 원본 변하는지
+Java에서의 불변성
+handleSubmit이 불변성을 지키는지
+CSS/레이아웃
+float: right로 X가 Edit보다 오른쪽인 이유
+form 안의 버튼이 아래로 내려가는 이유
+float이 요소/태그/속성인지
+float이 정렬을 뜻하는지
+button/form
+button의 type 속성 (submit vs button)
+form 밖의 submit 버튼이 동작하는지
+개발 도구
+Prettier 동작 확인
+Prettier 지원 언어
+VSCode 자동완성 확장
+React 개발자 확장 프로그램 + ID
+문법 오류 빨간 줄 표시
+한 줄 지우기 단축키
+VSCode가 오타를 잡아주는지
+에러 해결
+Cannot read properties of undefined (reading 'map') 에러
+Vite/프로젝트
+Vite 앱 이름 바꾸기
+Vite에 이름 변경 기능 있는지
+package-lock.json은 언제 변경되는지
+npm install이 매번 설치하는지
+npm install 후 메시지 해석
+Netflix Clone
+create-react-app 사용 여부
+Vite로 새 프로젝트 만들기
+TMDB API 약관
+TMDB 신청서 작성 (앱 이름, URL, 이용형태)
+Vite에서 .js vs .jsx
+axios 파일은 .js로 OK?
+Netflix 로고 구하는 법
+Netflix 폰트 코드 분석
+Netflix 로고가 텍스트인지
+Netflix <a> 태그 분석 (src 없음, 폰트 아이콘)
+
+
+
+
