@@ -2,6 +2,7 @@ console.log('Hello world');
 console.log(1234567);
 console.log(false);
 var greeting = '안녕하세요';
+console.log(greeting);
 console.log({a: "a", b: "b"});
 console.table({a:"a", b:"b"});
 
