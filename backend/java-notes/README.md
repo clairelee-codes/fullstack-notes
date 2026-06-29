@@ -1,7 +1,5 @@
 # Java Notes
 
----
-
 ## 2. 시작하기
 
 <details>
@@ -3192,3 +3190,1346 @@ String oddsStrStreamed = int0To9
 </details>
 
 ---
+
+## 10. 오류에 대비하기
+
+<details>
+<summary>예외처리, try문 더 알아보기</summary>
+
+### [1. 예외처리](./src/sec10/chap01)
+
+자바 프로그램의 오류 error
+
+- 컴파일 오류 - 컴파일 과정에서 잡히는 오류
+    - 문법 오류, 자료형 올, 잘목된 식별자 (오타) 등...
+- 런타입 오류
+    - 에러 _error_
+    - 예외 _exception_
+
+⭐ 에러와 예외
+둘 모두 `Throwable`의 자식 클래스
+
+- `Error` - 해결 불가능한 문제
+    - 무한루프, 메모리 한도 초과, 스택오버플로우 등
+        - 일반적으로 시스템 레벨의 문제
+- `Exception` - 대비하여 해결할 수 있는 문제
+    - 읽어오려는 파일이 없음, 배열의 길이 너머로 접근..
+
+🌳 상속도
+
+`Throwable`
+
+- `Error`
+    - `VirtualMachineError`
+        - `OutOfMemoryError`
+        - `StackOverflowError`
+        - …
+    - …
+- `Exception`
+    - ⭐️ `RuntimeException`
+        - `IndexOutOfBoundException`
+        - `NullPointerException`
+        - `ClassCastException`
+        - …
+    - `ReflectiveOperationException`
+        - `ClassNotFoundException`
+        - `NoSuchMethodException`
+        - …
+    - `IOException`
+        - `FileNotFoundException` - [*java.io](http://java.io) 패키지*
+    - …
+
+예외의 두 종류
+
+- Unchecked Exception
+- `RuntimeException`의 하위 클래스들
+- 개발자의 실수에 의해 발생할 수 있는 예외들
+- 필수는 아님
+- Checked Exception
+    - 기타 예외들
+    - 주로 외적 요인으로 발생
+    - 발생 가능한 부분에는 반드시 예외처리해야 함.
+        - 처리하지 않을 시 컴파일 단계에서 반려
+
+`Exception`
+
+- `getMessage` - 예외에 대한 간략 정보 문자열로 반환
+- `printStackTrace` - 에러의 종류, 발생위치, 전반 단계 *(호출스택)* 출력
+    - 디버깅에 매우 유용함
+
+---
+
+### [2. try문 더 알아보기](./src/sec10/chap02)
+
+- 예외 타입별로 대응하기
+- `finally`문
+
+---
+</details>
+
+<details>
+<summary>예외 정의하고 발생시키기, 예외 떠넘기기와 되던지기,<br>
+try with resources, NPE와 Optional</summary>
+
+### [3. 예외 정의하고 발생시키기](./src/sec10/chap03)
+
+#### 예외 던지기 throw
+
+- 인위적으로 예외 발생
+
+#### 사용자 정의 예외 만들기
+
+- 예외의 타입으로 어떤 예외인지 전달
+- 예외에 추가적 기능을 담을 때
+
+---
+
+### [4. 예외 떠넘기기와 되던지기](./src/sec10/chap04)
+
+#### Checked 예외 vs Unchecked 예외
+
+- 예외처리 필수 여부
+
+#### 예외를 메소드 외부로 떠넘기기
+
+- 메소드: "이런 예외가 발생할 수 있는데 난 책임안짐. 시킨 너가 처리해"
+
+#### 예외 되던지기
+
+- 메소드와 호출부 모두에서 예외를 처리
+- 메소드에서는 예외처리를 한뒤 이를 다시 던짐
+
+#### 예외의 버블링
+
+- 하위 메소드에 처리하지 못한 예외는 윗선 어디선가에서 처리
+
+#### 연결된 예외 chained exception
+
+- 특정 예외가 발생할 때 이를 원인으로 하는 다른 예외를 던짐
+
+---
+
+### [5. try with resources](./src/sec10/chap05)
+
+- 사용한 뒤 닫아주어야 하는 리소스 접근에 사용
+    - 파일 열람, 데이터 베이스 접근 등
+    - 기존에 `finally`블록으로 명시해야 했던 것을 간편화
+
+### [6. NPE와 Optional](./src/sec10/chap06)
+
+#### `NullPointException`
+
+- `null`인 것으로부터 필드나 메소드 등을 호출하려 할 때 발생
+    - 폐업한 중국집에 배민 주문
+- 컴파일러 선에서 방지되지 않음
+    - `RuntimeException`
+
+#### `Optional`
+
+- `Optional<T>`: `null`일 수도 있는 `T`타입의 값
+- `null`일 수 있는 값을 보다 안전하고 간편하게 사용하기 위함.
+
+#### `Optional`을 반환하는 스트림의 메소드들
+
+- 반혼할 값이 없을 수도 있는 메소드들 - 빈 스트림일 때 등
+
+</details>
+
+---
+
+## 11. 멀티태스킹
+
+<details>
+<summary>쓰레드 만들기, 쓰레드 다루기</summary>
+
+### [1. 쓰레드 만들기](./src/sec11/chap01)
+
+#### 프로세스와 쓰레드
+
+- 프로세스 _process_
+    - 각 프로그램마다 진행
+    - 각각 메모리 공간을 할당받음
+        - 코드, 데이터, 기타 시스템 지원
+        - 기본적으로 프로세스간 공유되지 않음
+    - 생성시 비교적 많은 시간과 메모리 소요
+    - 종료시 프로그램 종료
+- 쓰레드 _thread_
+    - 한 프로세스 안에 여럿 생성되어 진행될 수 있음
+    - 프로세스 내의 자원을 여러 쓰레드가 공유
+        - ⚠️ 잘못 다루면 위험
+    - 프로세스보다 생성 부담이 적음
+
+#### 쓰레드 만들기
+
+- 두 가지 방법
+    - `Thread`클래스 상속
+    - `Runnable`인터페이스 구현
+      인터페이스의 유연함 때문에 많이 사용
+
+```java
+Thread thread1 = new Thread1(); // Thread 상속시
+Thread thread2 = new Thread(new MyRunnable()); // Runnable 구현시
+
+//  ⚡️ Runnable의 익명 클래스로 생성
+Thread thread3 = new Thread(new Runnable() {
+    @Override
+    public void run() {
+        for (int i = 0; i < 20; i++) {
+            // 😴
+
+            System.out.print(3);
+        }
+    }
+});
+```
+
+#### `Sleep`메소드
+
+- `Thread`의 정적 메소드
+- 주어진 밀리초 동안 해당 쓰레드를 멈춤
+
+---
+
+### [2. 쓰레드 다루기](./src/sec11/chap02)
+
+#### 쓰레드에 이름 부여
+
+`Ex01.java`
+
+```java
+Thread tarzanThread = new Thread(new TarzanRun(100));
+
+// 쓰레드에 이름 붙이기
+tarzanThread.
+
+setName("타잔송");
+
+tarzanThread.
+
+start();
+```
+
+#### 쓰레드의 우선순위
+
+`Ex02.java`
+
+```java
+//  - 클수록 우선순위가 높음
+// thr0.setPriority(Thread.MIN_PRIORITY);
+// thr1.setPriority(Thread.NORM_PRIORITY);
+// thr2.setPriority(Thread.MAX_PRIORITY);
+
+// thr0.setPriority(Thread.MAX_PRIORITY);
+// thr1.setPriority(Thread.NORM_PRIORITY);
+// thr2.setPriority(Thread.MIN_PRIORITY);
+```
+
+```java
+new Thread(() ->{
+        for(
+int i = 0;
+i< 20;i++){
+        System.out.
+
+print(3);
+        for(
+int j = 0;
+j<Integer.MAX_VALUE;j++){
+        }
+
+        Thread.
+
+yield(); // ⭐
+    }
+            }).
+
+start();
+
+for(
+int i = 0;
+i< 20;i++){
+        System.out.
+
+print('M');
+    for(
+int j = 0;
+j<Integer.MAX_VALUE;j++){
+        }
+        }
+```
+
+#### 쓰레드를 사용한 멀티태스킹
+
+---
+
+</details>
+
+
+<details>
+<summary>쓰레드 그룹과 데몬 쓰레드</summary>
+
+### [3. 쓰레드 그룹과 데몬 쓰레드](./src/sec11/chap03)
+
+#### 쓰레드 그룹
+
+- 연관된 쓰레드들을 그룹으로 묶기 위해 사용됨
+- 쓰레드 그룹이 다른 쓰레드 그룹에 포함될 수 있음
+- 쓰레드를 일괄적으로 다루거나 보안상 분리하기 위해 사용
+
+```java
+Thread thr1 = new Thread(() -> {
+});
+
+//  💡 따로 그룹을 지정해주지 않은 쓰레드
+//  - main 쓰레드그룹에 속함
+ThreadGroup mainThrGroup = thr1.getThreadGroup();
+String mainThrGroupName = mainThrGroup.getName();
+
+//  💡 쓰레드 그룹 직접 생성하기
+ThreadGroup threadGroup1 = new ThreadGroup("TG_1");
+String thrGroup1Name = threadGroup1.getName();
+
+//  💡 그룹에 속한 쓰레드를 만드는 생성자
+Thread thr2 = new Thread(threadGroup1, () -> {
+});
+String thr2GroupName = thr2.getThreadGroup()
+        .getName();
+
+//  💡 또 다른 쓰레드 그룹에 속한 쓰레드 그룹 만들기
+ThreadGroup threadGroup2 = new ThreadGroup(threadGroup1, "TG_2");
+String thrGroup2ParentName = threadGroup2.getParent()
+        .getName();
+```
+
+#### 데몬 쓰레드
+
+- 다른 쓰레드(주 쓰레드)의 작업을 보조하는 역할
+- 주 쓰레드의 작업이 끝나면 자동 종료
+
+`Ex03.java`
+
+```java
+static void main(String[] args) {
+
+    Runnable rythmRun = () -> {
+        int index = 0;
+        String rythm = "쿵쿵짝";
+
+        while (true) {
+            System.out.print(rythm.charAt(index++) + " ");
+            index %= rythm.length();
+
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    };
+
+    Thread SingThread = new Thread(() -> {
+        String[] lines = new String[]{
+                "푸른하늘 은하수", "하얀 쪽배엔",
+                "계수나무 한나무", "토끼 세마리",
+                "한마리는 구워먹고", "한마리는 튀겨먹고",
+                "한마리는 도망간다", "서쪽나라로"
+        };
+
+        Thread rythmThread = new Thread(rythmRun);
+
+        //  💡 리듬 쓰레드를 본 노래 쓰레드의 데몬으로 지정
+        //  - 이 부분이 없으면 노래가 끝나도 리듬이 멈추지 않음
+        rythmThread.setDaemon(true);
+
+        rythmThread.start();
+
+        for (int i = 0; i < lines.length; i++) {
+            System.out.println("\n" + lines[i]);
+            try {
+                Thread.sleep(1200);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    });
+
+    SingThread.start();
+}
+```
+
+---
+
+</details>
+
+<details>
+<summary>동기화</summary>
+
+### [4. 동기화](./src/sec11/chap04)
+
+#### 동기화 _synchronization_
+
+- 특정 자원에 여러 쓰레드가동시에 접근하는 것을 방지
+- `synchronized`메소드 또는 블록 사용
+
+`ATM.java`
+
+```java
+public class ATM {
+    private int balance = 0;
+
+    public void addMoney(int amount) {
+        balance += amount;
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+
+    //  💡 앞에 synchronized를 붙이고 다시 실행해 볼 것
+    synchronized public void withdraw(String name, int amount) {
+
+        //  💡 또는 아래 내용을 이 블록으로 옮겨 볼 것
+        //  - this는 현 쓰레드를 의미함
+        //  - 메소드 내의 특정 작업만 동기화가 필요할 때
+        // synchronized (this) {
+
+        if (balance < amount) return;
+
+        System.out.printf(
+                "💰 %s 인출 요청 (현 잔액 %d)%n",
+                name, balance
+        );
+        try {
+            Thread.sleep(new Random().nextInt(700, 1000));
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        balance -= amount;
+        System.out.printf(
+                "✅ %s 인출 완료 (현 잔액 %d)%n",
+                name, balance
+        );
+        // }
+    }
+}
+
+```
+
+#### 캐싱에 의한 문제 방지하기
+
+- 해결책 1. volatile 사용
+- ⭐️ 해결책 2. 동기화 사용(getter & setter)
+
+---
+
+</details>
+
+<details>
+<summary>wait & noify, 쓰레드 풀과 Future</summary>
+
+### [5. wait & noify](./src/sec11/chap05)
+
+#### `Object`의 쓰레드 관련 메소드들
+
+- `wait`: 동기화 메소드 사용 중 자기 일을 멈춤
+    - 다른 쓰레드가 사용할 수 있도록 양보
+- `notify`: 일을 멈춘 상태의 쓰레드에게 자리가 비었음을 통보
+    - 대기열의 쓰레드 중 하나에만 통보
+        - 상황에 따라서는 무한대기상태가 될 수 있음
+- `notifyAll`: 대기중인 모든 쓰레드에 통보
+    - `notify`보다 일반적으로 널리 사용
+
+`PhoneBooth`
+
+```java
+synchronized public void phoneCall(SoldierRun soldier) {
+    System.out.println("☎️ %s 전화 사용중...".formatted(soldier.title));
+
+    try {
+        Thread.sleep(500);
+    } catch (InterruptedException e) {
+    }
+
+    System.out.println("👍 %s 전화 사용 완료".formatted(soldier.title));
+
+    //  💡 아래를 해제하지 않으면 첫 사용자가 혼자 다 씀
+    //  ℹ️ 단, JDK 제품마다 차이가 있을 수 있습니다.
+    notifyAll();
+    try {
+        //  💡 현 사용자를 폰부스에서 내보냄
+        //  - sleep처럼 아래의 예외 반환 확인
+        wait();
+    } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+    }
+}
+```
+
+#### 생산자와 소비자 모델
+
+- 같은 인스턴스의 다른 메소드에도 적용
+    - 커피를 채우는 동안은 테이크아웃을 할 수 없음
+
+---
+
+### [6. 쓰레드 풀과 Future](./src/sec11/chap06)
+
+#### 쓰레드 풀
+
+- `Executors` & `ExecutorService` 사용하여 구현
+    - `java.util.concurrent` 패키지에서 제공
+- 많은 쓰레드 작업이 필요할 때 동시에 돌아가는 쓰레드들의 개수 제한
+    - 너무 많은 쓰레드 작업으로 인한 부하 방지
+- 쓰레드를 그때그때 생성/제거하지 않음
+    - 주어진 개수만큼 쓰래드들을 만든 뒤 재사용
+- 개발자가 직접 쓰레드를 생성하고 조작할 필요 없음
+    - `Runnable`을 대기열에 추가하면 자리가 나는대로 태워보냄
+    - 쓰래드들을 쓰래드 풀이 자동으로 관리함
+
+#### 🪣 동굴 물 퍼내기 예제
+
+- 물이 40 들어찬 동굴에서 물이 20 남을때까지 펌핑
+- ⭐ 한 번에 5명이 들어가서 펌핑할 수 있음
+    - 쓰레드 *(🪣 양동이)* 가 5개 있음
+    - 각 펌핑은 5초 소요
+- 0.5초마다 지원자 *(🦺 `Runnable`)* 한 명씩 투입
+    - 양동이가 모두 사용중이면 자리가 날 때까지 대기
+
+`Main.java`
+
+```java
+static void main(String[] args) {
+
+    //  💡 쓰레드풀을 관리하는 라이브러리 클래스
+    ExecutorService es = Executors.newFixedThreadPool(
+            //  💡 동시에 일할 수 있는 지원자의 수
+            5
+    );
+
+    Cave cave = new Cave();
+
+    while (cave.getWater() > 20) {
+
+        //  💡 execute : Runnable(지원자)을 대기열에 추가
+        es.execute(new VolunteerRun(cave));
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            return;
+        }
+    }
+
+    //  💡 shutdown : 풀 닫기 (투입 중단, 더 투입시 예외)
+    //  - ⭐ 이를 생략하면 프로그램이 끝나지 않음
+    //  - 일단 들어간 지원자는 자리가 날 때까지 기다리다 일 함
+    // es.shutdown();
+    // es.execute(new VolunteerRun(cave)); // ⚠️ 닫혔으므로 예외 발생
+
+    // 💡 shutdownNow : 풀 닫고 투입된 지원자 해산, 진행중인 업무 강제종료
+    // - ⚠️ 진행중인 업무 강제종료는 보장하지 않음
+    //    - 각 쓰레드에 InterruptedException을 유발할 뿐
+    //    - 각 Runnable에서 해당 예외 발생시 종료되도록 처리해주어야 함
+    //  - 투입되어 대기중인 지원자들은 리스트 형태로 반환
+    List<Runnable> waitings = es.shutdownNow();
+    System.out.println(waitings);
+}
+```
+
+VolunteerRun.java
+
+```java
+public class VolunteerRun implements Runnable {
+    private static int lastNo = 0;
+    private static int working = 0;
+
+    private int no;
+    private Cave cave;
+
+    public VolunteerRun(Cave cave) {
+        this.no = ++lastNo;
+        this.cave = cave;
+
+        System.out.printf(
+                "🦺 %d번 지원자 투입 (남은 물 양: %d)%n", no, cave.getWater()
+        );
+    }
+
+    @Override
+    public void run() {
+        working++;
+        System.out.printf(
+                "🪣 %d번 지원자 시작 (현재 %d명 펌핑중, 남은 물 %d)%n",
+                no, working, cave.getWater()
+        );
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+
+            //  💡 아래의 return이 없다면 shutdownNow를 해도 중단되지 않음
+            //  - 주석해제하고 shutdownNow 버전으로 다시 실행
+            working--;
+            System.out.printf(
+                    "🛑 %d번 지원자 중단 (현재 %d명 펌핑중, 남은 물 %d)%n",
+                    no, working, cave.getWater()
+            );
+            return;
+        }
+
+        cave.pump();
+        working--;
+        System.out.printf(
+                "✅ %d번 지원자 완료 (현재 %d명 펌핑중, 남은 물 %d)%n",
+                no, working, cave.getWater()
+        );
+    }
+}
+```
+
+#### `Callable`
+
+- java.util.concurrent패키지의 클래스
+- Runnable처럼 다른 쓰레드에서의 작업에 사용 가능
+
+#### `Future`
+
+- 비동기적 연산의 결과
+    - `ExecutorService`인스턴스의 `submit`메소드: `Callable`을 받아 `Future` 반환
+- "~해서 얻어올 것"이란 의미
+    - 비동기 작업 후 `get`메소드로 최종 값을 받아옴
+
+`FutureExp.java`
+
+```java
+static void main(String[] args) {
+
+    ExecutorService es = Executors.newSingleThreadExecutor();
+
+    //  💡 submit 메소드 : Callable을 받아 Future 반환
+    //  - 'String을 받아올 임무를 가진 것'이란 의미
+    //  - execute 메소드(Runnable을 받음)와 비교
+    Future<String> callAnswer = es.submit(() -> {
+        Thread.sleep(2000);
+        return "여보세요";
+    });
+
+    //  ⭐ get 메소드를 호출하기 전까지는 막히지 않고 동시에 진행
+    //  - Future의 Callable은 다른 쓰레드에서 진행됨
+
+    //  💡 isDone 메소드 : 퓨쳐의 태스크가 종료되었는지 여부 확인
+    while (!callAnswer.isDone()) {
+        System.out.println("📞 따르릉...");
+        try {
+            Thread.sleep(400);
+        } catch (InterruptedException e) {
+        }
+    }
+
+    String result = null;
+
+    //  💡 get 메소드 : 해당 퓨쳐 쓰레드의 작업이 끝난 뒤 결과를 받아옴
+    //  - ⭐ 이를 완료하기까지 그 뒤의 작업들이 막힘 (블로킹)
+    //  - 대안을 위해 CompletableFuture가 나옴
+    try {
+        result = callAnswer.get();
+    } catch (InterruptedException | ExecutionException e) {
+    }
+
+    System.out.println("✅ 통화 시작 - " + result);
+    System.out.println("- - - 작업 종료 - - -");
+
+    es.shutdown();
+```
+
+`Future`을 쓰래드풀에서 사용하기
+
+- 각 쓰래드들로부터 결과값을 받아오는 작업에 사용
+
+`TryFuture.java`
+
+```java
+ArrayList<Integer> intList = new ArrayList<>();
+for(
+Future<Integer> future :futList){
+        try{
+        intList.
+
+add(future.get());
+        }catch(InterruptedException |
+ExecutionException e){
+        }
+        }
+```
+
+---
+
+</details>
+
+<details>
+<summary>CompletableFuture</summary>
+
+### [7. CompletableFuture](./src/sec11/chap07)
+
+- 자바8에 등장
+- `Future`보다 편리하고 강력한 기능들 제공
+    - 연속되는 작업들을 비동기적으로, 함수형으로 작성
+      여러 비동기 작업들을 조합하고 병렬적으로 실행 가능
+    - 예외 처리르 위한 기능들 제공
+
+`Main.java`
+
+```java
+//  💡 supplyAsync : Supplier를 받아 비동기 작업 실행
+//  - 결과를 CompletableFuture의 형태로 반환
+CompletableFuture<String> getHello = CompletableFuture.supplyAsync(() -> {
+            takeTime(false);
+            return "Hello";
+        });
+```
+
+```java
+//  💡 thenAccept : 받아온 값을 Consumer로 실행
+//  - 이전 과정으로부터 얻은 값으로 할 일을 지정함 (비동기)
+//  - 여기서는 일을 정해두기만 할 뿐, 호출은 get으로 (동기)
+//  - get으로 호출해도, supplyAsync 작업이 끝나고 나서야 실행
+CompletableFuture<Void> printHello = getHello.thenAccept(s -> {
+            System.out.println("받아온 값 처리 시작");
+            takeTime(false);
+            System.out.println(s);
+        });
+```
+
+```java
+public static void thenApplyEx1() throws ExecutionException, InterruptedException {
+
+    CompletableFuture.supplyAsync(() -> {
+                takeTime(false);
+                return new Random().nextInt(0, 6) + 1;
+
+            })
+            .thenApply(
+                    //  💡 thenApply : 얻어온 값을 Function에 넣어 다른 값 반환
+                    //  - 스트림의 map과 비슷
+                    i -> {
+                        takeTime(false);
+                        return "이번 숫자: " + i;
+                    }
+            )
+            .thenAccept(
+                    System.out::println
+            )
+            .get();
+}
+```
+
+```java
+//  각각 false, true로 시험해 볼 것
+public static void exceptionallyEx(Boolean error) throws ExecutionException, InterruptedException {
+    CompletableFuture.supplyAsync(() -> {
+                takeTime(error);
+                return "ㅇㅇ 안녕";
+
+            })
+            .exceptionally(e -> {
+                //  💡 exceptionally : 오류 발생시 대체 값 반환
+                e.printStackTrace();
+                return "안녕 못해.";
+            })
+            .thenApply(s -> {
+                takeTime(false);
+                return "대답: " + s;
+            })
+            .thenAccept(
+                    System.out::println
+            )
+            .get();
+}
+```
+
+```java
+public static void exceptionallyEx(Boolean error) throws ExecutionException, InterruptedException {
+    CompletableFuture.supplyAsync(() -> {
+                takeTime(error);
+                return "ㅇㅇ 안녕";
+
+            })
+            .exceptionally(e -> {
+                //  💡 exceptionally : 오류 발생시 대체 값 반환
+                e.printStackTrace();
+                return "안녕 못해.";
+            })
+            .thenApply(s -> {
+                takeTime(false);
+                return "대답: " + s;
+            })
+            .thenAccept(
+                    System.out::println
+            )
+            .get();
+}
+```
+
+```java
+public static void thenComposeEx() throws ExecutionException, InterruptedException {
+
+    CompletableFuture<Swordman> getBlueChamp = getChamp(Side.BLUE);
+    CompletableFuture<Swordman> getRedChamp = getChamp(Side.RED);
+
+    System.out.println("\n===== 양 진영 검사 훈련중 =====\n");
+
+    //  💡 thenCompose : 두 CompleteFuture의 결과를 조합
+    //  -  ⭐️ 두 작업이 동시에 진행됨 주목
+    getBlueChamp.thenCompose(
+                    b -> getRedChamp.thenApply(
+                            r -> {
+                                if (b.hp == r.hp) throw new RuntimeException();
+                                return b.hp >= r.hp ? b : r;
+                            })
+            )
+            .thenApply(Swordman::toString)
+            .thenApply(s -> "🏆 승자 : " + s)
+            .exceptionally(e -> "⚔ 무승부") // ⭐️ 어느 위치에서든 처리 가능
+            .thenAccept(System.out::println)
+            .get();
+}
+```
+
+```java
+public static void thenCombineEx() {
+    CompletableFuture<Swordman> getBlueChamp = getChamp(Side.BLUE);
+    CompletableFuture<Swordman> getRedChamp = getChamp(Side.RED);
+
+    System.out.println("\n===== 양 진영 검사 훈련중 =====\n");
+
+    try {
+        //  💡 thenCombine : thenCompose와 문법만 다름
+        getBlueChamp.thenCombine(
+                        getRedChamp,
+                        (b, r) -> {
+                            if (b.hp == r.hp) throw new RuntimeException();
+                            return b.hp >= r.hp ? b : r;
+                        })
+                .thenApply(Swordman::toString)
+                .thenApply(s -> "🏆 승자 : " + s)
+                .exceptionally(e -> "⚔ 무승부") // ⭐️ 어느 위치에서든 처리 가능
+                .thenAccept(System.out::println)
+                .get();
+    } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+    } catch (ExecutionException e) {
+        throw new RuntimeException(e);
+    }
+}
+```
+
+```java
+public static void allOfEx1() throws ExecutionException, InterruptedException {
+    CompletableFuture<Integer> roll1 = rollDiceFuture();
+    CompletableFuture<Integer> roll2 = rollDiceFuture();
+    CompletableFuture<Integer> roll3 = rollDiceFuture();
+    CompletableFuture<Integer> roll4 = rollDiceFuture();
+    CompletableFuture<Integer> roll5 = rollDiceFuture();
+
+    // 💡 allOf : 여러 CompletableFuture가 모두 완료될 때까지 기다리는 CompletableFuture 생성
+    // roll1, roll2, roll3, roll4, roll5 작업이 모두 끝나면 완료됨
+    // thenRun에서 각 Future의 결과를 모아 처리
+    CompletableFuture.allOf(
+                    roll1, roll2, roll3, roll4, roll5
+            )
+            .thenRun(() -> {
+                //  💡 프린트 순서 확인
+                System.out.println("✅ 결과 모두 나옴");
+
+                //  ⭐ 각 Future로부터 결과 받아옴
+                // 여기서 join은 기다리는 역할이 아니라 결과 추출 역할
+                Integer int1 = roll1.join();
+                Integer int2 = roll2.join();
+                Integer int3 = roll3.join();
+                Integer int4 = roll4.join();
+                Integer int5 = roll5.join();
+
+                String result = IntStream.of(int1, int2, int3, int4, int5)
+                        .boxed()
+                        .map(i -> i == -1 ? "(무효)" : String.valueOf(i))
+                        .collect(Collectors.joining(", "));
+                System.out.println("최종 결과 : " + result);
+            })
+            .get();
+}
+
+```
+
+```java
+public static CompletableFuture<String> raceRunner(String name, ForkJoinPool fjp) {
+    return CompletableFuture.supplyAsync(() -> {
+                        takeTime(new Random().nextBoolean());
+                        System.out.printf("👟 %s 도착%n", name);
+                        return name;
+                    }, fjp
+            )
+            .exceptionally(e -> null);
+}
+
+public static void anyOfEx() throws ExecutionException, InterruptedException {
+    ArrayList<CompletableFuture<String>> runners = new ArrayList<>();
+
+    String[] names =
+            "철수,영희,돌준,병미,핫훈"
+                    //"A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U"
+                    .split(",");
+
+    //  ⭐️ 경쟁할 쓰레드보다 풀 수가 적지 않도록
+    //  - 3으로 줄여 볼 것 : 앞의 셋 중에서만 나옴
+    ForkJoinPool forkJoinPool = new ForkJoinPool(names.length);
+
+    Arrays.stream(names)
+            .forEach(r -> runners.add(raceRunner(r, forkJoinPool)));
+
+    // Thread.sleep(2000);
+
+    // 💡 anyOf : 가장 먼저 완료된 CompletableFuture의 결과로 완료됨
+    // - 나머지 CompletableFuture는 계속 실행됨
+    CompletableFuture.anyOf(
+                    runners.stream()
+                            .toArray(CompletableFuture[]::new)
+            )
+            .thenAccept(w -> {
+                System.out.println(
+                        w != null
+                                ? ("🏆 1등: " + w)
+                                : "💣 지뢰 폭발"
+                );
+            })
+            .get();
+}
+```
+
+---
+</details>
+<details>
+<summary>병렬 스트림</summary>
+
+### [8. 병렬 스트림](./src/sec11/chap08)
+
+- 자바 스트림의 일부 메소드는 병렬로 처리 가능
+    - filter, map, reduce
+- 대부분의 경우 성능 향상
+    - 여러 쓰레드에서 병렬로 처리되기 때문
+    - 작업에 따라서는 느려질 수 있음
+        - 데이터 크기가 작을 경우 (쓰레드 생성 시간이 더 큼)
+        - 순차적으로 처리되어야 하는 작업
+        - 기타... 작업의 특성 고려
+
+```java
+static void main(String[] args) {
+
+    final int RANGE = 10000000;
+
+    measureTime("직렬 필터", () -> {
+        IntStream filtered = IntStream.range(0, RANGE)
+                .filter(i -> i % 2 == 0);
+    });
+    measureTime("병렬 필터", () -> {
+        IntStream filtered = IntStream.range(0, RANGE)
+                .parallel() // 💡 스트림을 병렬로 바꿔줌
+                .filter(i -> i % 2 == 0);
+    });
+
+    System.out.println("\n- - - - -\n");
+
+    measureTime("직렬 매핑", () -> {
+        Stream<String> mapped = IntStream.range(0, RANGE)
+                .boxed()
+                .map(String::valueOf);
+    });
+    measureTime("병렬 매핑", () -> {
+        Stream<String> mapped = IntStream.range(0, RANGE)
+                .boxed()
+                .parallel()
+                .map(String::valueOf);
+    });
+
+    System.out.println("\n- - - - -\n");
+
+    //  ⭐️ reduce : 병렬시 오히려 느려짐
+    measureTime("직렬 접기", () -> {
+        OptionalInt reduced = IntStream.range(0, RANGE)
+                .reduce(Integer::sum);
+    });
+    measureTime("병렬 접기", () -> {
+        OptionalInt reduced = IntStream.range(0, RANGE)
+                .parallel()
+                .reduce(Integer::sum);
+    });
+
+    System.out.println("\n- - - - -\n");
+
+    //  ⭐️ sum : 개수가 커질수록 병렬시 유리해짐
+    //  - 숫자 조정해 볼 것
+    measureTime("직렬 합계", () -> {
+        int sum = IntStream.range(0, RANGE)
+                .sum();
+    });
+    measureTime("병렬 합계", () -> {
+        int sum = IntStream.range(0, RANGE)
+                .parallel()
+                .sum();
+    });
+
+    System.out.println("\n- - - - -\n");
+
+    final int TRI_RANGE = 10;
+    //final int TRI_RANGE = RANGE; // 혼합이 더 느려짐
+
+    measureTime("직렬 3종", () -> {
+        OptionalInt tri = IntStream.range(0, TRI_RANGE)
+                .filter(i -> i % 2 == 0)
+                .map(i -> i + 1)
+                .reduce(Integer::sum);
+    });
+    measureTime("병렬 3종", () -> {
+        OptionalInt tri = IntStream.range(0, TRI_RANGE)
+                .parallel()
+                .filter(i -> i % 2 == 0)
+                .map(i -> i + 1)
+                .reduce(Integer::sum);
+    });
+
+    //  ⭐️ 작업에 따라 병렬과 직렬의 혼합이 유리할 수 있음
+    //  - 이 작업의 경우 : 데이터 개수가 적음
+    //  - 성능이 중요할 시 테스트해가며 최적의 코드를 찾을 것
+    measureTime("혼합 3종", () -> {
+        OptionalInt tri = IntStream.range(0, TRI_RANGE)
+                .parallel()
+                .filter(i -> i % 2 == 0)
+                .map(i -> i + 1)
+                .sequential() // ⭐️
+                .reduce(Integer::sum);
+    });
+}
+```
+
+---
+
+</details>
+
+<details>
+<summary>Thread-safe한 클래스들</summary>
+
+### [9. Thread-safe한 클래스들](./src/sec11/chap09)
+
+#### Concurrent 컬렉션
+
+```java
+//  3개의 쓰레드에서 한 해시맵에 10000개의 데이터를 주입
+
+Map<String, Integer> hashMap = new HashMap<>();
+
+Runnable toHashMap = () -> {
+    for (int i = 0; i < 10000; i++) {
+        hashMap.put("key" + i, i);
+    }
+};
+
+Thread t1 = new Thread(toHashMap);
+Thread t2 = new Thread(toHashMap);
+Thread t3 = new Thread(toHashMap);
+
+        t1.
+
+start(); t2.
+
+start(); t3.
+
+start();
+        
+        try{
+                t1.
+
+join(); t2.
+
+join(); t3.
+
+join();
+        }catch(
+InterruptedException e){}
+```
+
+- 해시맵의 `size`>10000 (실행시마다 달라짐)
+- 요소는 10000개 존재하지만, `size`필드값을 올리는 과정에서 문제
+    - 둘 이상의 쓰레드가 동시에 올려버리므로
+- Thread-safe 하지 않음
+
+#### `ConcurrentHashMap`
+
+멀티쓰레딩으로 인한 오류를 줄여줄 뿐 아니라 **속도도 개선**
+
+```java
+Map<String, Integer> concurrentHashMap = new ConcurrentHashMap<>();
+```
+
+```shell
+#일반 해시맵 사이즈 : 10226
+#⌛️ 일반 해시맵 소요시간: 77,326,500 나노초
+#- - - - -
+#Concurrent 해시맵 사이즈 = 10000
+#⌛️ Concurrent 해시맵 소요시간: 21,306,900 나노초
+```
+
+#### 기타 동기성 관련 컬렉션들
+
+- `ConcurrentLinkedQueue`
+    - 마찬가지로 내부 구획을 사용한 큐
+- `CopyOnWriterArrayList`, `CopyOnWriteArraySet`
+    - 요소 추가/제거시마다 내부 배열을 복사
+        - 수정작업이 이뤄지는 동안에도 일기에 문제 없음
+    - 읽기가 빈번한 사용처에 적합
+        - 쓰기가 빈번한 곳에서는 비효율적
+- `ConcurrentSkepListSet`, `ConcurrentSkipListMap`
+    - 내부 구획을 사용하여 쓰레드 안정성 확보
+    - Skep List란 구조를 사용하여 읽고 쓰기를 빠르게
+
+![ConcurrentSkep](./assets/ConcurrentSkip.png)
+
+#### Atomic 클래스
+
+- 특정 변수에 대해 쓰레드로부터의 안전 제고
+    - 한 번에 하나의 쓰레드만 접근 가능
+- 부동소수점 자료형(`float`, `double`)은 원자 클래스 지원되지 않음
+
+  | 클래스 | 저장 대상 | 주요 용도 |
+                                                    |----------|----------|----------|
+  | `AtomicInteger` | `int` | 카운터, 증가/감소 |
+  | `AtomicLong` | `long` | 큰 숫자 카운터 |
+  | `AtomicBoolean` | `boolean` | 상태 플래그 |
+  | `AtomicReference<T>` | 객체 참조 | 객체 교체, CAS |
+
+```java
+static int count = 0;
+static AtomicInteger atomicCount = new AtomicInteger(0);
+
+public static void main(String[] args) {
+
+    Runnable incCount = () -> {
+        for (int i = 0; i < 10000; i++) {
+            count++;
+            atomicCount.getAndIncrement();
+        }
+    };
+
+    Thread t1 = new Thread(incCount);
+    Thread t2 = new Thread(incCount);
+    Thread t3 = new Thread(incCount);
+
+    t1.start();
+    t2.start();
+    t3.start();
+
+    try {
+        t1.join();
+        t2.join();
+        t3.join();
+    } catch (InterruptedException e) {
+    }
+
+    int result = count;
+    int atomicResult = atomicCount.get();
+}
+```
+
+```java
+static Counter counter = new Counter(0);
+
+//  💡 AtomicReference : 참조 타입을 원자적으로 다루기 위한 클래스
+//  - ⚠️ 이 클래스의 인스턴스 자체는 atomic이 #아님
+static AtomicReference atomicCounter = new AtomicReference(new Counter(0));
+
+public static void main(String[] args) {
+
+    Runnable nonAtomic = () -> {
+        for (int i = 0; i < 10000; i++) {
+            counter.increase();
+        }
+    };
+    Runnable atomic = () -> {
+        for (int i = 0; i < 10000; i++) {
+
+            Counter before, after;
+            do {
+                before = (Counter) atomicCounter.get();
+                after = new Counter(before.getCount() + 1);
+
+                // 💡 compareAndSet : ⭐️ atomic 메소드
+                //  - 기존 값과 비교하여 같으면 새로운 값으로 교체
+
+                //  ⭐️ do-while을 사용하여, 다른 쓰레드가 중간에 개입한 경우를 제외
+                //  - atomicCounter의 값이 before와 같다면
+                //  - after로 교체한 뒤 true 반환
+            } while (!atomicCounter.compareAndSet(before, after));
+        }
+    };
+        
+        ...
+
+```
+
+</details>
+
+---
+
+## 12. 데이터 입출력과 네트워킹
+
+<details>
+<summary>기본적인 파일/폴더 다루기</summary>
+
+### [1. 기본적인 파일/폴더 다루기](./src/sec12/chap01)
+
+`java.io`패키지
+-`File`클래스를 사용하여 파일들을 다룸
+
+- 여러 문제점과 한계를 갖고 있었음
+    - 멀티쓰레드에서 안전하지 않음
+    - 기능 한정
+      OS간의 이식성 문제 (경로 처리 이슈)
+- java.nio.file 패키지의 기능들로 대체
+
+#### 1. 파일 다루기
+
+```java
+// File 객체 생성
+File file = new File(filePath);
+
+// 파일 생성
+if(!file.
+
+exists()){
+        file.
+
+createNewFile();
+}
+```
+
+- File 주요 메서드
+
+  | 메서드 | 설명 |
+                              | --------------- | ----------- |
+  | `exists()`      | 존재 여부 |
+  | `getName()`     | 파일명 |
+  | `isFile()`      | 파일 여부 |
+  | `isDirectory()` | 디렉토리 여부 |
+  | `length()`      | 파일 크기(Byte) |
+  | `renameTo(File)` | 파일/디렉토리 이름 변경 |
+  | `delete()` | 파일/디렉토리 삭제 |
+
+- 경로
+    - getAbsolutePath() : 절대경로
+    - getCanonicalPath() : 정규화된 실제 경로 (., .. 제거)
+        - IOException 처리 필요
+
+```java
+file.getAbsolutePath();
+file.
+
+getCanonicalPath();
+```
+
+#### 2. 폴더 다루기
+
+- 폴더 내용 조회
+
+  | 메서드           | 설명                       |
+                    | ------------- | ------------------------ |
+  | `listFiles()` | 폴더 내 파일/폴더를 `File[]`로 반환 |
+  | `list()`      | 폴더 내 이름들을 `String[]`로 반환 |
+
+```java
+folder.listFiles();
+folder.
+
+list();
+```
+
+---
+
+</details>
+
+<details>
+<summary>NIO2로 파일과 폴더 다루기</summary>
+
+### [2.NIO2로 파일과 폴더 다루기](./src/sec12/chap02)
+
+`ava.nio.file` 패키지
+
+- 자바7에 도입
+- 기존의 `java.io` 패키지보다 안정적이고 다양한 기능
+
+#### 1. `Path` 클래스
+
+- 파일 시스템 경로를 인스턴스화한 `Path` 객체 생성
+- 경로를 보다 편리하고 직관적으로 다루는 기능들 제공
+
+| 메서드                | 설명         |
+|--------------------|------------|
+| `Paths.get()`      | Path 객체 생성 |
+| `toAbsolutePath()` | 절대 경로      |
+| `resolve()`        | 경로 합치기     |
+| `getParent()`      | 부모 경로      |
+| `relativize()`     | 상대 경로      |
+| `getFileName()`    | 파일/폴더명     |
+| `subpath()`        | 하위 경로 추출   |
+
+#### 2. `Files` 클래스
+
+- 파일을 조작하는 다양하고 편리한 기능들 제공
+- 생성
+
+| 메서드                   | 설명       |
+|-----------------------|----------|
+| `createFile()`        | 파일 생성    |
+| `createDirectory()`   | 폴더 생성    |
+| `createDirectories()` | 중첩 폴더 생성 |
+| `exists()`            | 존재 여부 확인 |
+
+- 쓰기
+
+| 메서드                         | 설명        |
+|-----------------------------|-----------|
+| `write(path, byte[])`       | 바이트 배열 쓰기 |
+| `write(path, List<String>)` | 문자열 목록 쓰기 |
+
+※ 기존 내용이 있으면 덮어씀
+
+- 읽기
+
+| 메서드              | 설명                       |
+|------------------|--------------------------|
+| `readAllBytes()` | 파일 전체를 byte[]로 읽기        |
+| `readAllLines()` | 파일 전체를 List<String>으로 읽기 |
+| `lines()`        | 파일을 Stream<String>으로 읽기  |
+
+※ `lines()`는 대용량 파일에 적합하며 `try-with-resources` 사용
+
+- 파일 조작
+
+| 메서드        | 설명    |
+|------------|-------|
+| `copy()`   | 파일 복사 |
+| `move()`   | 파일 이동 |
+| `delete()` | 파일 삭제 |
+
+- `File` : 파일/폴더 자체를 다루는 객체
+- `Path` : 경로를 표현하는 객체
+- `Files` : 파일 생성, 읽기, 쓰기, 복사, 이동, 삭제 담당
+- 대용량 파일 읽기 → `Files.lines()`
+- 중첩 폴더 생성 → `Files.createDirectories()`
+
+</details>
+
+
+<details>
+<summary>I/O 스트림</summary>
+
+### [3. I/O 스트림](./src/sec12/chap03)
+
+</details>
