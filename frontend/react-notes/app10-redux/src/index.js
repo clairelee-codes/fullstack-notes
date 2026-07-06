@@ -5,26 +5,32 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { createStore } from "redux";
 import counter from "./reducers";
+import rootReducer from "./reducers";
+import { Provider } from "react-redux";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 // redux store
-const store = createStore(counter);
+const store = createStore(rootReducer);
 
 // console.log(store.getState());
 
-const render = () =>
-  root.render(
-    <React.StrictMode>
+root.render(
+  <React.StrictMode>
+    {/* react redux package의 Privider로 리덕터 subscribe */}
+    <Provider store={store}>
       <App
-        value={store.getState()}
-        onIncrement={() => store.dispatch({ type: "INCREMENT" })}
-        onDecrement={() => store.dispatch({ type: "DECREMENT" })}
+      // value={store.getState()}
+      // onIncrement={() => store.dispatch({ type: "INCREMENT" })}
+      // onDecrement={() => store.dispatch({ type: "DECREMENT" })}
       />
-    </React.StrictMode>,
-  );
+    </Provider>
+  </React.StrictMode>,
+);
 
-render();
-store.subscribe(render);
+// react redux package의 Privider 없이 리덕터 subscribe
+// render();
+// store.subscribe(render);
+
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
