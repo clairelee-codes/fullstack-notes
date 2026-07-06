@@ -3,14 +3,17 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { createStore } from "redux";
-import counter from "./reducers";
+import { applyMiddleware, createStore } from "redux";
 import rootReducer from "./reducers";
 import { Provider } from "react-redux";
+import { loggerMiddleware } from "./middleware";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
+// 미들웨어 등록하기
+const middleware = applyMiddleware(loggerMiddleware);
 // redux store
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, middleware);
 
 // console.log(store.getState());
 
