@@ -7,11 +7,12 @@ import { applyMiddleware, createStore } from "redux";
 import rootReducer from "./reducers";
 import { Provider } from "react-redux";
 import { loggerMiddleware } from "./middleware";
+import { thunk } from "redux-thunk";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 // 미들웨어 등록하기
-const middleware = applyMiddleware(loggerMiddleware);
+const middleware = applyMiddleware(thunk, loggerMiddleware);
 // redux store
 const store = createStore(rootReducer, middleware);
 
