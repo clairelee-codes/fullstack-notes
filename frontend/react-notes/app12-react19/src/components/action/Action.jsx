@@ -1,5 +1,13 @@
 import React, { useState } from "react";
 
+// onSubmit: 전통적인 방식
+// action: React19의 새로운 방식
+// 비교
+// 1. e.preventDefault() 자동
+// 2. FormData 자동 전달
+// 3. 폼 자동 리셋
+// 4. 비동기 처리
+
 const PostForm = ({ addPost }) => {
   const formAction = async (formData) => {
     const newPost = {
@@ -13,7 +21,7 @@ const PostForm = ({ addPost }) => {
   return (
     <form action={formAction}>
       <input type="text" name="title" />
-      <button type="submit">submit</button>
+      <button type="submit">Submit</button>
     </form>
   );
 };
