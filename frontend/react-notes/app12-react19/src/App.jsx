@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Use from "./components/use/Use";
 import Action from "./components/action/Action";
@@ -7,9 +7,16 @@ import UseActionState from "./components/useActionState/UseActionState";
 import UseOptimistic from "./components/useOptimistic/UseOptimistic";
 
 function App() {
+  // "use memo";
   const [count, setCount] = useState(0);
   const [text, setText] = useState("");
   console.log("App is rendering");
+
+  const aObject = { a: "a", text };
+
+  useEffect(() => {
+    console.log("useEffect Called");
+  }, [aObject]);
 
   return (
     <>
@@ -19,7 +26,7 @@ function App() {
       <input value={text} onChange={(e) => setText(e.target.value)} />
       <Text text={text} />
       {/* <Use />
-      <Action />
+      <Action /> 
       <UseFormStatus />
       <UseActionState />
       <UseOptimistic /> */}
