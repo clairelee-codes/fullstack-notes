@@ -21,13 +21,14 @@ export default function App() {
     };
     setTodoData([...todoData, newTodo]);
     localStorage.setItem("todoData", JSON.stringify([...todoData, newTodo]));
+    // 입력란에 있던 글씨 지워주기
     setValue("");
   };
 
   return (
-    <div className="container">
-      <div className="todoBlock">
-        <div className="title">
+    <div className="flex items-center justify-center w-screen h-screen bg-blue-100">
+      <div className="w-full p-6 m-4 bg-white rounded shadow lg:w-3/4 lg:max-w-lg">
+        <div className="flex justify-between mb-3 font-bold">
           <h1>할 일 목록</h1>
         </div>
 

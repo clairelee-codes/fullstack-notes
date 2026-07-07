@@ -1,25 +1,32 @@
 import { useState } from "react";
 
-export default function List({ title, completed, id, todoData, setTodoData }) {
+export default function List({
+  title,
+  completed,
+  id,
+  todoData,
+  setTodoData,
+  isDragging,
+}) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(title);
 
-  const btnStyle = {
-    color: "#fff",
-    border: "none",
-    padding: "5px 9px",
-    borderRadius: "50%",
-    cursor: "pointer",
-    float: "right",
-  };
+  // const btnStyle = {
+  //   color: "#fff",
+  //   border: "none",
+  //   padding: "5px 9px",
+  //   borderRadius: "50%",
+  //   cursor: "pointer",
+  //   float: "right",
+  // };
 
-  const getStyle = (completed) => {
-    return {
-      padding: "10px",
-      borderBottom: "1px #ccc dotted",
-      textDecoration: completed ? "line-through" : "none",
-    };
-  };
+  // const getStyle = (completed) => {
+  //   return {
+  //     padding: "10px",
+  //     borderBottom: "1px #ccc dotted",
+  //     textDecoration: completed ? "line-through" : "none",
+  //   };
+  // };
 
   const handleClick = (id) => {
     console.log(id);
@@ -61,35 +68,58 @@ export default function List({ title, completed, id, todoData, setTodoData }) {
 
   if (isEditing) {
     return (
-      <form style={getStyle(completed)} onSubmit={handleSubmit}>
-        <input value={editedTitle} autoFocus onChange={handleEditChange} />
+      <form
+        onSubmit={handleSubmit}
+        className="flex items-center gap-2 w-full px-4 py-1 my-2 border rounded border-gray-200"
+      >
+        <input
+          value={editedTitle}
+          autoFocus
+          onChange={handleEditChange}
+          className="border-2 rounded pl-4"
+        />
         <button
           type="button"
-          style={btnStyle}
           onClick={() => setIsEditing(false)}
+          className="px-4 py-2"
         >
           X
         </button>
-        <button type="submit" style={btnStyle}>
+        <button type="submit" className="py-2">
           Save
         </button>
       </form>
     );
   } else {
     return (
-      <div style={getStyle(completed)}>
-        <input
-          type="checkbox"
-          onChange={() => handleCompleteChange(id)}
-          checked={completed}
-        />
-        {title}
-        <button style={btnStyle} onClick={() => handleClick(id)}>
-          X
-        </button>
-        <button style={btnStyle} onClick={() => setIsEditing(true)}>
-          Edit
-        </button>
+      <div
+        className={`${isDragging ? "bg-gray-400" : "bg-gray-100"} flex items-center justify-between w-full px-4 py-1 my-2 text-gray-600 border rounded border-gray-200`}
+      >
+        <div className="items-center">
+          <input
+            type="checkbox"
+            onChange={() => handleCompleteChange(id)}
+            checked={completed}
+            className="mr-1"
+          />
+          <span className={completed ? "line-through" : undefined}>
+            {title}
+          </span>
+        </div>
+        <div className="items-center">
+          <button
+            className="px-4 py-2 float-right"
+            onClick={() => handleClick(id)}
+          >
+            X
+          </button>
+          <button
+            className="px-4 py-2 float-right"
+            onClick={() => setIsEditing(true)}
+          >
+            Edit
+          </button>
+        </div>
       </div>
     );
   }
