@@ -7,13 +7,31 @@ import UseActionState from "./components/useActionState/UseActionState";
 import UseOptimistic from "./components/useOptimistic/UseOptimistic";
 
 function App() {
+  const [count, setCount] = useState(0);
+  const [text, setText] = useState("");
+  console.log("App is rendering");
+
   return (
-    // <Use />
-    // <Action />
-    // <UseFormStatus />
-    // <UseActionState />
-    <UseOptimistic />
+    <>
+      <button onClick={() => setCount((count) => count + 1)}>
+        count is {count}
+      </button>
+      <input value={text} onChange={(e) => setText(e.target.value)} />
+      <Text text={text} />
+      {/* <Use />
+      <Action />
+      <UseFormStatus />
+      <UseActionState />
+      <UseOptimistic /> */}
+    </>
   );
 }
 
 export default App;
+
+// React Compiler 최적화 확인
+// 불필요한 재렌더링 방지
+const Text = ({ text }) => {
+  console.log("Text is rendering");
+  return <div>{text}</div>;
+};
