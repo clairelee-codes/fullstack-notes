@@ -73,27 +73,29 @@ const List = React.memo(
 
     if (isEditing) {
       return (
-        <form
-          onSubmit={handleSubmit}
-          className="flex items-center gap-2 w-full px-4 py-1 my-2 border rounded border-gray-200"
-        >
-          <input
-            value={editedTitle}
-            autoFocus
-            onChange={handleEditChange}
-            className="border-2 rounded pl-4"
-          />
-          <button
-            type="button"
-            onClick={() => setIsEditing(false)}
-            className="px-4 py-2"
+        <div className="flex items-center justify-between w-full px-4 py-1 my-2 bg-gray-100 text-gray-600 border rounded border-gray-200">
+          <form
+            onSubmit={handleSubmit}
+            className="flex items-center gap-2 w-full"
           >
-            X
-          </button>
-          <button type="submit" className="py-2">
-            Save
-          </button>
-        </form>
+            <input
+              value={editedTitle}
+              autoFocus
+              onChange={handleEditChange}
+              className="w-full px-3 py-2 mr-4 text-gray-500 border-2 border-blue-400 rounded focus:outline-none"
+            />
+            <button type="submit" className="px-4 py-2 float-right">
+              Save
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsEditing(false)}
+              className="px-4 py-2 float-right"
+            >
+              X
+            </button>
+          </form>
+        </div>
       );
     } else {
       return (
