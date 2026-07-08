@@ -2,7 +2,15 @@ import React from "react";
 import { useState } from "react";
 
 const List = React.memo(
-  ({ title, completed, id, todoData, setTodoData, isDragging }) => {
+  ({
+    title,
+    completed,
+    id,
+    todoData,
+    setTodoData,
+    isDragging,
+    handleClick,
+  }) => {
     console.log("List");
 
     const [isEditing, setIsEditing] = useState(false);
@@ -25,14 +33,6 @@ const List = React.memo(
     //   };
     // };
 
-    const handleClick = (id) => {
-      console.log(id);
-      let newTodoData = todoData.filter((data) => data.id !== id);
-      console.log(newTodoData);
-      setTodoData(newTodoData);
-      localStorage.setItem("todoData", JSON.stringify(newTodoData));
-    };
-
     const handleCompleteChange = (id) => {
       let newTodoData = todoData.map((data) => {
         if (data.id === id) {
@@ -45,6 +45,14 @@ const List = React.memo(
       setTodoData(newTodoData);
       localStorage.setItem("todoData", JSON.stringify(newTodoData));
     };
+
+    // const handleClick = (id) => {
+    //   console.log(id);
+    //   let newTodoData = todoData.filter((data) => data.id !== id);
+    //   console.log(newTodoData);
+    //   setTodoData(newTodoData);
+    //   localStorage.setItem("todoData", JSON.stringify(newTodoData));
+    // };
 
     const handleEditChange = (e) => {
       setEditedTitle(e.target.value);
