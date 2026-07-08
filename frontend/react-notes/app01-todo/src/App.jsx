@@ -4,6 +4,8 @@ import Lists from "./components/Lists";
 import Form from "./components/Form";
 
 export default function App() {
+  console.log("App");
+
   const initailTodoData = localStorage.getItem("todoData")
     ? JSON.parse(localStorage.getItem("todoData"))
     : [];

@@ -1,7 +1,10 @@
 import List from "./List";
+import React from "react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 
-export default function Lists({ todoData, setTodoData }) {
+const Lists = React.memo(({ todoData, setTodoData }) => {
+  console.log("Lists");
+
   const handleEnd = (result) => {
     // console.log(result);
     if (!result.destination) return;
@@ -52,4 +55,6 @@ export default function Lists({ todoData, setTodoData }) {
       </DragDropContext>
     </div>
   );
-}
+});
+
+export default Lists;
