@@ -7,6 +7,8 @@ import hello.core.member.MemberService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class orderServiceTest {
 
@@ -18,9 +20,13 @@ public class orderServiceTest {
 
     @BeforeEach
     public void beforeEach() {
-        AppConfig appConfig = new AppConfig();
-        memberService = appConfig.memberService();
-        orderService = appConfig.orderService();
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        memberService = applicationContext.getBean("memberService", MemberService.class);
+        orderService = applicationContext.getBean("orderService", OrderService.class);
+
+        // AppConfig appConfig = new AppConfig();
+        // memberService = appConfig.memberService();
+        // orderService = appConfig.orderService();
     }
 
     @Test
@@ -29,7 +35,7 @@ public class orderServiceTest {
         Member member = new Member(memberId, "memberNameA", Grade.VIP);
         memberService.join(member);
 
-        Order order = orderService.createOrder(memberId, "itemA", 1000);
+        Order order = orderService.createOrder(memberId, "itemA", 10000);
         Assertions.assertThat(order.getDiscountPrice())
                 .isEqualTo(1000);
     }

@@ -13,6 +13,7 @@ public class OrderServiceImpl implements OrderService {
     // DIP 위반 -> OCP 위반
     // AppConfig로 구현 객체 생성함으로써 해결.
     // 생성한 객체 인스턴스의 참조를 생성자를 통해서 주입해준다.
+    // 이제 OrderServiceImpl를 수정할 필요 없음.
 
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
