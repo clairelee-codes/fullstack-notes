@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class MemberApp {
-    // 순수 자바로 테스트
+
     public static void main(String[] args) {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
         MemberService memberService = applicationContext.getBean("memberService", MemberService.class);
@@ -15,6 +15,7 @@ public class MemberApp {
         // AppConfig appConfig = new AppConfig();
         // MemberService memberService = appConfig.memberService();
 
+        // 순수 자바로 테스트
         // MemberService memberService = new MemberServiceImpl();
         Member memberA = new Member(1L, "memberA", Grade.VIP);
         memberService.join(memberA);
