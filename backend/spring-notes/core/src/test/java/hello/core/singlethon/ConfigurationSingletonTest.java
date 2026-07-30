@@ -34,7 +34,7 @@ public class ConfigurationSingletonTest {
         // 출력 결과: AppConfig$$SpringCGLIB
         System.out.println("been = " + bean.getClass());
         // 만약 @Bean만 적용한다면 순수한 AppConfig로 스프링 빈에 등록됨을 확인할 수 있음.
-        // 싱글톤 안됨.
+        // 싱글톤 보장 안됨.
         // call AppConfig.memberService
         // call AppConfig.memberRepository
         // call AppConfig.memberRepository
