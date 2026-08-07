@@ -2,6 +2,10 @@ package hello.core.discount;
 
 import hello.core.member.Grade;
 import hello.core.member.Member;
+import org.springframework.stereotype.Component;
+
+@Component
+// @Qualifier("fixDiscountPolicy")    // 타입 중복빈있을 경우 Qualifier주입
 
 public class FixDiscountPolicy implements DiscountPolicy {
 
