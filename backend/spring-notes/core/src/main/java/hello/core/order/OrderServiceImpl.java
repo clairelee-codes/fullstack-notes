@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor    // final 붙은 변수를 포함한 생성자 만들어줌
+@RequiredArgsConstructor    // final 붙은 필드를 모아서 생성자를 자동으로 만들어줌
 public class OrderServiceImpl implements OrderService {
 
     // private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
