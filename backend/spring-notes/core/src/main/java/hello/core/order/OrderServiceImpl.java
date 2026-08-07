@@ -3,9 +3,11 @@ package hello.core.order;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor    // final 붙은 변수를 포함한 생성자 만들어줌
 public class OrderServiceImpl implements OrderService {
 
     // private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
@@ -43,12 +45,12 @@ public class OrderServiceImpl implements OrderService {
     // 생성자에서 여러 의존관계도 한번에 주입받을 수 있음.
     // final사용 시 컴파일 오류로 실수 방지됨.
     // @Autowired  // 생성자가 하나일 경우 생략가능
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-        // System.out.println("1. memberRepository : " + memberRepository);
-        // System.out.println("1. discountPolicy : " + discountPolicy);
-        this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
-    }
+    // public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    //     // System.out.println("1. memberRepository : " + memberRepository);
+    //     // System.out.println("1. discountPolicy : " + discountPolicy);
+    //     this.memberRepository = memberRepository;
+    //     this.discountPolicy = discountPolicy;
+    // }
 
     // // 일반 메서드 의존관계 주입
     // @Autowired
