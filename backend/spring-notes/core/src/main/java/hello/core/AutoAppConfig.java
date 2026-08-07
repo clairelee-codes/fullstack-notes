@@ -17,5 +17,9 @@ import org.springframework.context.annotation.FilterType;
 )
 public class AutoAppConfig {
 
-
+    // 수동빈이 자동빈을 오버라이딩함.
+    // @Bean(name = "memoryMemberRepository")
+    // MemberRepository memberRepository() {
+    //     return new MemoryMemberRepository();
+    // }
 }

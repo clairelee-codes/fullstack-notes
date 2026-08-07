@@ -3,7 +3,6 @@ package hello.core.order;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -18,14 +17,45 @@ public class OrderServiceImpl implements OrderService {
     // 생성한 객체 인스턴스의 참조를 생성자를 통해서 주입해준다.
     // 이제 OrderServiceImpl를 수정할 필요 없음.
 
+    // 기본으로 생성자 주입을 사용하고, 필수 값이 아닌경우에 수정자 주입 방식을 옵션으로 사용하는 것을 권장
+
+    // 필드 의존관계 주입
+    // @Autowired
     private final MemberRepository memberRepository;
+    // @Autowired
     private final DiscountPolicy discountPolicy;
 
-    @Autowired  // 생성자에서 여러 의존관계도 한번에 주입받을 수 있음.
+    // 수정자 의존관계 주입
+    // @Autowired
+    // public void setMemberRepository(MemberRepository memberRepository) {
+    //     System.out.println("2. memberRepository : " + memberRepository);
+    //     this.memberRepository = memberRepository;
+    // }
+
+    // 수정자 의존관계 주입
+    // @Autowired(required = true)
+    // public void setDiscountPolicy(DiscountPolicy discountPolicy) {
+    //     System.out.println("2. discountPolicy : " + discountPolicy);
+    //     this.discountPolicy = discountPolicy;
+    // }
+
+    // 생성자 의존관계 주입
+    // 생성자에서 여러 의존관계도 한번에 주입받을 수 있음.
+    // final사용 시 컴파일 오류로 실수 방지됨.
+    // @Autowired  // 생성자가 하나일 경우 생략가능
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        // System.out.println("1. memberRepository : " + memberRepository);
+        // System.out.println("1. discountPolicy : " + discountPolicy);
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
+
+    // // 일반 메서드 의존관계 주입
+    // @Autowired
+    // public void init(MemoryMemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    //     this.memberRepository = memberRepository;
+    //     this.discountPolicy = discountPolicy;
+    // }
 
 
     @Override
@@ -38,7 +68,7 @@ public class OrderServiceImpl implements OrderService {
 
     }
 
-    // 테스트 용도
+    // 싱글톤 테스트 용도
     public MemberRepository getMemberRepository() {
         return memberRepository;
     }
