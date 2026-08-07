@@ -3,10 +3,11 @@ package hello.core.order;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-// @RequiredArgsConstructor    // final 붙은 필드를 모아서 생성자를 자동으로 만들어줌
+@RequiredArgsConstructor    // final 붙은 필드를 모아서 생성자를 자동으로 만들어줌
 public class OrderServiceImpl implements OrderService {
 
 
@@ -100,6 +101,14 @@ public class OrderServiceImpl implements OrderService {
     //
     // 4. @Primary 주입
     // public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    //     this.memberRepository = memberRepository;
+    //     this.discountPolicy = discountPolicy;
+    // }
+    //
+    // 5. @Qualifier 어노테이션 만들어서 주입
+    // 문자 입력 실수를 방지
+    // 어노테이션 상속기능은 java가 아닌 spring에서 지원하는 기능
+    // public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy discountPolicy) {
     //     this.memberRepository = memberRepository;
     //     this.discountPolicy = discountPolicy;
     // }
